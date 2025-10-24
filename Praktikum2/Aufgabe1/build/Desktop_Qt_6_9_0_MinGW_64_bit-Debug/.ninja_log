@@ -1,0 +1,13 @@
+# ninja log v6
+42	408	7830124592654406	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+29	512	7830125628645007	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+37	819	7830125628733262	CMakeFiles/Aufgabe1.dir/random.cpp.obj	a0d8b3bd6fc6946b
+820	959	7830125636548915	Aufgabe1.exe	5f206a3bc91bdbe1
+39	415	7830125859406562	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+416	549	7830125863181482	Aufgabe1.exe	5f206a3bc91bdbe1
+44	437	7830126114620306	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+437	564	7830126118540861	Aufgabe1.exe	5f206a3bc91bdbe1
+42	421	7830126288922444	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+423	558	7830126292732590	Aufgabe1.exe	5f206a3bc91bdbe1
+42	421	7830126509181178	CMakeFiles/Aufgabe1.dir/main.cpp.obj	94373b2f1ec7a059
+421	560	7830126512966984	Aufgabe1.exe	5f206a3bc91bdbe1
