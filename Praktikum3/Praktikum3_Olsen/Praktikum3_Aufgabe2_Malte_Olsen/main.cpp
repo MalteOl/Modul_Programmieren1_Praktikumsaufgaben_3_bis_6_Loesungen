@@ -1,16 +1,12 @@
 #include <iostream>
-#include "random.h"
 #include <windows.h>
 #include <string>
-#include <vector>
+
+
+
+#define N 80
 
 using namespace std;
-using std::cout;
-using std::cin;
-using std::string;
-
-
-
 
 int main()
 {
@@ -43,5 +39,5 @@ int main()
     }
 
 
-    return 0;
+return 0;
 }
