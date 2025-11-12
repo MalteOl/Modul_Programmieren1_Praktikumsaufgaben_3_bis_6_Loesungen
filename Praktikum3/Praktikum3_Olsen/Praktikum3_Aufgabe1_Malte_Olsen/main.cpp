@@ -13,22 +13,48 @@ int main()
     int budgetOfPlayer = 10000;
     int betMoney;
     int betNumber;
-    int realNumber = getRandom(1,10);
-
-    cout <<realNumber;
+    int realNumber;
 
     int choice;
     string colour, column;
     int number;
 
     do {
-        cout << "Wie hoch ist Ihr Einsatz?" << endl;
-        cin >> betMoney;
-        cout << "Auf welche Zahl wetten Sie?" << endl;
-        cin >> betNumber;
+
+
+        // Budgetlimit
+        do {
+            cout << "Wie hoch ist Ihr Einsatz?" << endl;
+            cin >> betMoney;
+            if ((betMoney > 0) && (betMoney <= budgetOfPlayer)) {
+                break;
+            }
+            cout << "Bitte mehr als 0 € und weniger als " << budgetOfPlayer << " € ausgeben" << endl;
+        } while (!(betMoney > 0) || !(betMoney >= budgetOfPlayer));
+
+
 
         do {
-            std::cout << "\n1 Farbe" << std::endl;
+            // Zahlenrad neu drehen
+            realNumber = getRandom(1,10);
+            cout <<realNumber; // bitte auskommentieren für Live-Zustand
+
+            cout << "Auf welche Zahl wetten Sie?" << endl;
+            cin >> betNumber;
+
+            cout << "Im Roulette-Rad ist die Zahl " << realNumber << " gefallen." << endl;
+
+            if (realNumber != betNumber) {
+                budgetOfPlayer -= betMoney;
+                cout << "Sie haben verloren!" << endl << "Sie haben noch "
+                     << budgetOfPlayer << " € übrig." << endl;
+            } else {
+                budgetOfPlayer = budgetOfPlayer * 35 + betMoney;
+                cout << "Sie haben gewonnen!" << endl << "Sie haben noch "
+                     << budgetOfPlayer << " € übrig." << endl;
+            }
+
+            std::cout << "1 Farbe" << std::endl;
             std::cout << "2 Spalte" << std::endl;
             std::cout << "3 Zahl" << std::endl;
             std::cout << "0 Programm beenden" << std::endl;
@@ -59,9 +85,9 @@ int main()
                 break;
             }
             case 2: {
-                vector<int> v1(37); // Spalte 1
-                vector<int> v2(37); // Spalte 2
-                vector<int> v3(37); // Spalte 3
+                vector<int> v1 = {1,4,7,10,13,16,19,22,25,28,31,34}; // Spalte 1
+                vector<int> v2 = {2,5,8,11,14,17,20,23,26,29,32,35}; // Spalte 2
+                vector<int> v3 = {3,6,9,12,15,18,21,24,27,30,33,36}; // Spalte 3
 
                 cout << "2 Spalte [1], [2] oder [3]" << endl;
                 cin >> column;
@@ -70,12 +96,7 @@ int main()
 
                 // Spalte 1
                 if(column=="1"){
-                    for (int i = 1; i <= v1.size(); ++i) {
-                        v1[i]=i;
-                        i = i+2;
-                    }
-
-                    for (int i = 0; i <= 36; i++) {
+                    for (int i = 0; i < v1.size(); i++) {
                         if (v1[i]==realNumber)
                             numberGuess = true;
                     }
@@ -85,32 +106,18 @@ int main()
                 // Spalte 2
 
                 if(column=="2"){
-                    for (int i = 2; i <= v2.size(); ++i) {
-                        v2[i]=i;
-                        i = i+2;
-                    }
-
-                    for (int i = 0; i <= 36; i++) {
+                    for (int i = 0; i < v2.size(); i++) {
                         if (v2[i]==realNumber)
                             numberGuess = true;
-
                     }
-
                 }
-
                 // Spalte 3
 
                 if(column=="3"){
-                    for (int i = 3; i <= v3.size(); ++i) {
-                        v3[i]=i;
-                        i = i+2;
-                    }
-
-                    for (int i = 0; i <= 36; i++) {
+                    for (int i = 0; i < v3.size(); i++) {
                         if (v3[i]==realNumber)
                             numberGuess = true;
                     }
-
                 }
 
                 if (numberGuess == true) {
@@ -118,6 +125,7 @@ int main()
                     budgetOfPlayer += 2*betMoney;
                     cout << " Sie haben noch " << budgetOfPlayer << " € übrig" << endl;
                 } else {
+                    budgetOfPlayer -= betMoney;
                     cout << "Sie haben mit " << column << " falsch geraten!";
                     cout << " Sie haben noch " << budgetOfPlayer << " € übrig" << endl;
                 }
@@ -126,7 +134,18 @@ int main()
             }
             case 3: {
                 cout << "3 Zahl zwischen [0] und [36]" << endl;
+                realNumber = getRandom(0,36);
+                cout << realNumber; // bitte auskommentieren für Live-Zustand
                 cin >> number;
+                if (realNumber != number) {
+                    budgetOfPlayer -= betMoney;
+                    cout << "Sie haben verloren!" << endl << "Sie haben noch "
+                         << budgetOfPlayer << " € übrig." << endl;
+                } else {
+                    budgetOfPlayer = budgetOfPlayer * 35 + number;
+                    cout << "Sie haben gewonnen!" << endl << "Sie haben noch "
+                         << budgetOfPlayer << " € übrig." << endl;
+                }
                 break;
             }
             default:
@@ -134,17 +153,7 @@ int main()
             }
         } while (choice != 0);
 
-        cout << "Im Roulette-Rad ist die Zahl " << realNumber << " gefallen." << endl;
 
-        if (realNumber != betNumber) {
-            budgetOfPlayer -= betMoney;
-            cout << "Sie haben verloren!" << endl << "Sie haben noch "
-                 << budgetOfPlayer << " € übrig." << endl;
-        } else {
-            budgetOfPlayer = budgetOfPlayer * 35 + betMoney;
-            cout << "Sie haben gewonnen!" << endl << "Sie haben noch "
-                 << budgetOfPlayer << " € übrig." << endl;
-        }
 
     } while (budgetOfPlayer > 0);
 
