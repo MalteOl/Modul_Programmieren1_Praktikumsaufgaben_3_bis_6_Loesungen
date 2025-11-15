@@ -1,7 +1,10 @@
 #include <iostream>
 #include <windows.h>
+#include <string.h>
+#include <ctype.h>
 #include <string>
-
+#include <vector>
+#include <windows.h>
 
 
 #define N 80
@@ -10,34 +13,24 @@ using namespace std;
 
 int main()
 {
-    // Umlaute in der Konsole darstellen
     SetConsoleOutputCP(CP_UTF8);
 
-    int key;
-    string word, decryptedWord;
+    string plaintext;
+    unsigned key;
+    string cipher;
+    cout << "Klartext eingeben: ";
+    cin >> plaintext;
 
-    cout << "Bitte Schlüssel eingeben" << endl;
+    cout << "Schlüssel eingeben: ";
     cin >> key;
-    cout << "Bitte nur ein einziges zu verschlüsselndes Wort ohne Leerzeichen eingeben" << endl;
-    cin >> word;
-    cout << word;
 
-
-    for (int i = 0; i < word.size(); i++) {
-
-        cout << endl << static_cast<int>(word[i]) << " ";
-        cout << word[i] << " ";
-        int convertToNumberBetween1And26 = word[i] - 96;
-        cout << convertToNumberBetween1And26 << " ";
-        int addKey = (convertToNumberBetween1And26 + key) % 26;
-        cout << addKey << " ";
-        int convertBackToNumberBetween97And122 = addKey + 96;
-        cout << convertBackToNumberBetween97And122 << " ";
-        string s(1,convertBackToNumberBetween97And122);
-        cout << endl << s << " ";
+    // von String in Integer umwandeln und um Wert des Schlüssels verschieben
+    for (int i = 0; i < plaintext.size(); i++) {
+        cout << plaintext[i] << " wird zu " << int(plaintext[i]) << " wird zu "
+             << int(plaintext[i]) + key << " wird zu " << std::string(1,static_cast<char>(int(plaintext[i]) + key)) << endl;
 
     }
 
-
-return 0;
+    // cout << "Verschlüsselter Text: " << cipher << endl;
+    return 0;
 }
