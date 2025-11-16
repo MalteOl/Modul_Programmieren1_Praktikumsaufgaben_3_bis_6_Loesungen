@@ -6,10 +6,8 @@
 #include <vector>
 #include <windows.h>
 
-
-#define N 80
-
 using namespace std;
+using std::string;
 
 int main()
 {
@@ -17,20 +15,45 @@ int main()
 
     string plaintext;
     unsigned key;
-    string cipher;
-    cout << "Klartext eingeben: ";
-    cin >> plaintext;
+    int i = 0, j = 0;
+    vector<string> cipher(800000);
+    bool numberGuess = false;
+
+    // checken, ob Wort nur aus Buchstaben bestehend ist
+    do {
+        cout<< "Bitte Wort ohne Leerzeichen eingeben" << endl;
+        cin>>plaintext;
+
+        numberGuess = true;
+        for (int i = 0; i < plaintext.size(); i++) {
+            if (!(isalpha(plaintext[i]))) {
+                numberGuess = false;
+                break;
+            }
+        }
+
+    } while (!numberGuess);
 
     cout << "Schlüssel eingeben: ";
     cin >> key;
 
-    // von String in Integer umwandeln und um Wert des Schlüssels verschieben
     for (int i = 0; i < plaintext.size(); i++) {
-        cout << plaintext[i] << " wird zu " << int(plaintext[i]) << " wird zu "
-             << int(plaintext[i]) + key << " wird zu " << std::string(1,static_cast<char>(int(plaintext[i]) + key)) << endl;
+        // Zahlen von String in Integer umwandeln und Schlüssel aufaddieren
+        int tmp = (tolower(plaintext[i]) - 'a') + key;
+
+        // Probleme, die aufgrund eines womöglich negativen Schlüssels und einem
+        // daraus folgenden Überschreiten des Zahlenbereichs enstehen, beseitigen
+        if (tmp<0)
+            tmp += 26;
+        tmp = ((tmp % 26)+26)%26 + 'a';
+        cipher[j++] = tmp;
 
     }
 
-    // cout << "Verschlüsselter Text: " << cipher << endl;
+    for (int i = 0; i < cipher.size(); i++) {
+    cout << cipher[i];
+    }
+
+
     return 0;
 }
