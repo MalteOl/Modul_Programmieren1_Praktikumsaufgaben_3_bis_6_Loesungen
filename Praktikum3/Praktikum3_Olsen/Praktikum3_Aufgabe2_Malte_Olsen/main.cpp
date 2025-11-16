@@ -38,20 +38,23 @@ int main()
     cin >> key;
 
     for (int i = 0; i < plaintext.size(); i++) {
-        // Zahlen von String in Integer umwandeln und Schlüssel aufaddieren
+        // tmp ist die um key verschobene Position des Buchstabens
+        // mit tolower werden Großbuchstaben in Kleinbuchstaben umgewandelt
+        // mit -'a' wird der ASCII-Wert von 'a', also 97, abgezogen; somit
+        // kommen wir auf einen Bereich von 0 bis 25
         int tmp = (tolower(plaintext[i]) - 'a') + key;
 
-        // Probleme, die aufgrund eines womöglich negativen Schlüssels und einem
-        // daraus folgenden Überschreiten des Zahlenbereichs enstehen, beseitigen
-        if (tmp<0)
-            tmp += 26;
-        tmp = ((tmp % 26)+26)%26 + 'a';
-        cipher[j++] = tmp;
+        cout << tmp << endl;
 
+        // falls tmp negativ ist, muss mittels doppeltem Modulorechnen wieder
+        // in den positiven Bereich umgerechnet werden
+        if (tmp<0)
+            tmp = ((tmp % 26)+26)%26 + 'a';
+        cipher[j++] = tmp;
     }
 
     for (int i = 0; i < cipher.size(); i++) {
-    cout << cipher[i];
+        cout << cipher[i];
     }
 
 
