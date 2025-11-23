@@ -1,6 +1,9 @@
 #include "minesweeper.h"
 #include <iostream>
 #include "random.h"
+#include <array>
+#include <iomanip>
+
 
 using namespace std;
 using std::array;
@@ -10,7 +13,7 @@ using std::cout;
 Tile board[rows][cols];
 int mines = 20;
 
-void initialize(){
+void initialize(int mines){
     // 1. Anlegen des Spielfelds und Initialisieren aller Felder mit "hidden",
     // noch keine benachbarten Minen
     for (size_t r = 0; r < rows; r++)
@@ -63,17 +66,44 @@ void initialize(){
             }
         }
     }
+
+}
+
+void display(bool showMines){
+
     // Spielfeld ausgeben
     for (size_t r = 0; r < rows; r++)
     {
+        // Zeilennummer ausgeben
+        cout << setw(2) << r + 1 << "|";
+
         for (size_t c = 0; c < cols; c++)
         {
-            cout << board[r][c].allocation << " ";
+            if (showMines && board[r][c].allocation == mine) {
+                cout << "X ";
+            } else if (board[r][c].allocation == hidden) {
+                cout << "* ";
+            } else {
+                if (board[r][c].sumOfAllMinesInAdjacentFields == 0) {
+                    cout << ". ";
+                } else {
+                    cout << " " << board[r][c].sumOfAllMinesInAdjacentFields << " ";
+                }
+            }
         }
         cout << endl;
     }
-}
 
+
+    // Spaltennummer ausgeben
+    cout << "   -----------------------" << endl;
+    cout << "  ";
+    for (int c = 0; c < rows; c++) {
+        cout << setw(2) << c+1;
+    }
+    cout << endl;
+
+}
 
 
 

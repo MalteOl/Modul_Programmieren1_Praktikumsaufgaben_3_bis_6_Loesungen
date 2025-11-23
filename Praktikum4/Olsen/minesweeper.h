@@ -22,6 +22,7 @@ extern int mines;
 
 extern Tile board[rows][cols];
 
-void initialize();
+void initialize(int mines);
+void display(bool showMines);
 
 #endif // MINESWEEPER_H
