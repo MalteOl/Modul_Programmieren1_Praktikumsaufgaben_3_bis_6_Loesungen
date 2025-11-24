@@ -105,5 +105,36 @@ void display(bool showMines){
 
 }
 
+bool processInput() {
+    int x, y;
 
+    while (true) {
+        cout << "Bitte geben Sie nun Ihren naechsten Zug ein." << endl;
+        cout << "Zeile (1-" << rows << ") _Leerzeichen_ Spalte (1-" << cols << "): ";
 
+        cin >> x >> y;
+
+        // Adjust to 0-based indexing
+        x--;
+        y--;
+
+        // Validate input
+        if (x >= 0 && x < rows && y >= 0 && y < cols) {
+            break;
+        }
+    }
+
+    // Check if mine was hit
+    if (board[x][y].allocation == mine) {
+        display(true); // Zeige alle Minen
+        return false;
+    }
+
+    // Reveal the tile if it's hidden
+    if (board[x][y].allocation == hidden) {
+        board[x][y].allocation = revealed;
+    }
+
+    display(false); // Zeige aktuelles Spielfeld ohne Minen
+    return true;
+}
