@@ -80,14 +80,18 @@ void display(bool showMines){
         for (size_t c = 0; c < cols; c++)
         {
             if (showMines && board[r][c].allocation == mine) {
+                // revealed nur Minen
                 cout << "X ";
+            } else if (!showMines && board[r][c].allocation == mine) {
+                cout << "* ";
             } else if (board[r][c].allocation == hidden) {
                 cout << "* ";
             } else {
+                // revealed alles was keine Minen sind
                 if (board[r][c].sumOfAllMinesInAdjacentFields == 0) {
                     cout << ". ";
                 } else {
-                    cout << " " << board[r][c].sumOfAllMinesInAdjacentFields << " ";
+                    cout << board[r][c].sumOfAllMinesInAdjacentFields << " ";
                 }
             }
         }
