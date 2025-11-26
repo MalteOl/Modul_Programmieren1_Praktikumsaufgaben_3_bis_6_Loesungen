@@ -141,6 +141,7 @@ bool processInput() {
     // Reveal the tile if it's hidden
     if (board[x][y].allocation == hidden) {
         board[x][y].allocation = revealed;
+        hiddenTilesRemaining--;
     }
 
     display(false); // Zeige aktuelles Spielfeld ohne Minen

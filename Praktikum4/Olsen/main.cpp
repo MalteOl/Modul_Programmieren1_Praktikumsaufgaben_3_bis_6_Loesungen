@@ -24,7 +24,7 @@ int main()
         if (gameRunning) {
             // Keep checking neighbors until no more tiles are revealed
             while (checkNeighbours()) {
-                display(false);
+                // display(false);
             }
             display(false);
         }
