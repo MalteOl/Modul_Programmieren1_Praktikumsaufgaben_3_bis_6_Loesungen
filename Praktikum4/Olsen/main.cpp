@@ -1,6 +1,5 @@
 #include <iostream>
 #include "minesweeper.h"
-#include <array>
 #include <windows.h>
 #include "random.h"
 
@@ -20,8 +19,15 @@ int main()
     // Game loop
     bool gameRunning = true;
 
-    while (gameRunning) {
+    while (gameRunning && hiddenTilesRemaining > 0) {
         gameRunning = processInput();
+        if (gameRunning) {
+            // Keep checking neighbors until no more tiles are revealed
+            while (checkNeighbours()) {
+                display(false);
+            }
+            display(false);
+        }
     }
 
     // Game over message

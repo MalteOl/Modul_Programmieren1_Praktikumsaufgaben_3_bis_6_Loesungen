@@ -21,9 +21,13 @@ constexpr size_t cols = 12;
 extern int mines;
 
 extern Tile board[rows][cols];
+extern int hiddenTilesRemaining;
+
 
 void initialize(int mines);
 void display(bool showMines);
 bool processInput();
+bool revealedEmptyNeighbour(int x, int y);
+bool checkNeighbours();
 
 #endif // MINESWEEPER_H

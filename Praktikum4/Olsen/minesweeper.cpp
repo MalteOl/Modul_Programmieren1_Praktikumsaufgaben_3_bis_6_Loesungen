@@ -12,6 +12,8 @@ using std::cout;
 
 Tile board[rows][cols];
 int mines = 20;
+int hiddenTilesRemaining = rows * cols - mines;
+
 
 void initialize(int mines){
     // 1. Anlegen des Spielfelds und Initialisieren aller Felder mit "hidden",
@@ -107,6 +109,9 @@ void display(bool showMines){
     }
     cout << endl;
 
+    // Print separator
+    cout << "-------------------------" << endl;
+    cout << "Verbleibende verdeckte Felder: " << hiddenTilesRemaining << endl;
 }
 
 bool processInput() {
@@ -130,7 +135,6 @@ bool processInput() {
 
     // Check if mine was hit
     if (board[x][y].allocation == mine) {
-        display(true); // Zeige alle Minen
         return false;
     }
 
@@ -141,4 +145,39 @@ bool processInput() {
 
     display(false); // Zeige aktuelles Spielfeld ohne Minen
     return true;
+}
+
+bool revealedEmptyNeighbour(int x, int y) {
+    // Check all 8 possible neighbors
+    for (int dr = -1; dr <= 1; dr++) {
+        for (int dc = -1; dc <= 1; dc++) {
+            if (dr == 0 && dc == 0) continue; // Skip current tile
+
+            int nr = x + dr;
+            int nc = y + dc;
+
+            // Check if neighbor is within bounds
+            if (nr >= 0 && nr < rows && nc >= 0 && nc < rows) {
+                if (board[nr][nc].allocation == revealed && board[nr][nc].sumOfAllMinesInAdjacentFields == 0) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool checkNeighbours() {
+    bool changed = false;
+    for (int r = 0; r<rows; r++) {
+        for (int c = 0; c < rows; c++) {
+            // angrenzende Felder gibt, die bereits aufgedeckt sind und 0 Minen in der Nachbarschaft haben
+            if(board[r][c].allocation==hidden && revealedEmptyNeighbour(r,c)) {
+                board[r][c].allocation = revealed;
+                hiddenTilesRemaining--;
+                changed = true;
+            }
+        }
+    }
+    return changed;
 }
