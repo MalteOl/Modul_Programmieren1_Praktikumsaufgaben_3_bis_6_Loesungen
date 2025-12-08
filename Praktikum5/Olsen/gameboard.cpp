@@ -17,14 +17,12 @@ GameBoard::GameBoard() {
     for (auto &row : m_board)
         row.fill('.');
 
-    const array<int, 10> shipSizes = {5,4,4,3,3,3,2,2,2,2};
-
     randomPlaceShips();
 }
 
 void GameBoard::printBoard()
 {
-    cout << "Dein Spielfeld" << endl;
+    cout << endl << "Dein Spielfeld" << endl;
     // Spielfeld ausgeben
     for (size_t r = 0; r < m_board.size(); r++) {
         // Zeilennummer ausgeben
@@ -104,7 +102,8 @@ void GameBoard::randomPlaceShips()
     int shipsPlaced = 0;
     // Schlachtschiff aus 5 Teilen
 
-    for (size_t i = 0; i < 4; i++)
+    // Original placement pattern extended to include 4 submarines (len=2)
+    for (size_t i = 0; i < 5; i++)
     {
         int length = 6 - i; // length of the ship
         for (int j = 0; j < i; ++j)
