@@ -11,6 +11,8 @@
 
 Part::Part(int row, int col)
 {
+    m_row = row;
+    m_col = col;
     m_status = 0;
 }
 

@@ -68,8 +68,6 @@ class Part
    */
   int getCol() const;
 
-  void setCol(int newCol);
-
   private:
   /**
    * @brief The row where this part is located on the grid.

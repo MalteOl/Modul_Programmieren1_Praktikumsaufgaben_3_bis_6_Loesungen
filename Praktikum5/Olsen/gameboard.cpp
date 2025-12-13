@@ -24,10 +24,10 @@ void GameBoard::printBoard()
 {
     cout << endl << "Dein Spielfeld" << endl;
     // Spielfeld ausgeben
-    for (size_t r = 0; r < m_board.size(); r++) {
+    for (size_t r = 0; r < m_board.size()-1; r++) {
         // Zeilennummer ausgeben
         cout << std::setw(2) << r << "|";
-        for (size_t c = 0; c < m_board.size(); c++) {
+        for (size_t c = 0; c < m_board.size()-1; c++) {
             cout << m_board[r][c] << " ";
         }
         cout << endl;
@@ -47,8 +47,8 @@ void GameBoard::printEnemyBoard()
     cout << "Spielfeld des Gegners" << endl;
     for (size_t r = 0; r < m_enemyBoard.size(); r++) {
         cout << std::setw(2) << r << "|";
-        cout << ". ";
-        for (size_t c = 0; c < m_enemyBoard.size()-1; c++){
+//        cout << ". ";
+        for (size_t c = 0; c < m_enemyBoard.size(); c++){
             cout << m_enemyBoard[r][c] << " ";
         }
         cout << endl;
