@@ -16,7 +16,9 @@ vector<Part> m_parts;
 // Direction direction) wird verwendet, um ein neues Schiff zu erstellen.
 Ship::Ship(int row, int col, int lengthOfShip, Direction direction)
 {
-
+    // für jede Koordinate Teile anlegen
+    // solange bis m_parts.size()
+    // Direction 4 Richtungen
 }
 
 bool Ship::hasPartIn(int row, int col)
