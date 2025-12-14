@@ -142,6 +142,10 @@ class Ship
       // Schiffe einer unterschiedliche Anzahl an Teilen besitzen (bzw. Schiffe unterschiedlich lang sind)
 
   vector<Part> m_parts;
+      int row;
+  int col;
+      int lengthOfShip;
+  Direction direction;
 };
 
 #endif // SHIP_H

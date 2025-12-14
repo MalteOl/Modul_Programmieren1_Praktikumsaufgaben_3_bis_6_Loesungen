@@ -3,6 +3,7 @@
 // Player stellt eine Spielerin dar und speichert den Namen sowie
 // jeweils die Anzahl der gewonnenen und verlorenen Spiele.
 
+// Hier ist explizit eine Initialisierungsliste zu verwenden!
 Player::Player(const string &playerName): m_gamesLost(0),m_gamesWon(0),m_playerName(playerName)
 {
 
@@ -18,13 +19,6 @@ int Player::getGamesLost() const
     return m_gamesLost;
 }
 
-/**
- * @brief Get games played.
- * @return The total number of games this player has played.
- *
- * \see getGamesWon
- * \see getGamesLost
- */
 // The total number of games this player has played.
 int Player::getGamesPlayed() const
 {

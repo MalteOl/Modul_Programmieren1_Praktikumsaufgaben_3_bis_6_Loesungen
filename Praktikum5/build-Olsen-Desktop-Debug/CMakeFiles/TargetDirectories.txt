@@ -1,0 +1,3 @@
+/home/stud/Di23x_G-Islam_Olsen/Praktikum5/build-Olsen-Desktop-Debug/CMakeFiles/battleships.dir
+/home/stud/Di23x_G-Islam_Olsen/Praktikum5/build-Olsen-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/stud/Di23x_G-Islam_Olsen/Praktikum5/build-Olsen-Desktop-Debug/CMakeFiles/rebuild_cache.dir
