@@ -51,8 +51,8 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            x--;
-            y--;
+//            x--;
+//            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
@@ -68,8 +68,8 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            x--;
-            y--;
+//            x--;
+//            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
