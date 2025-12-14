@@ -35,10 +35,6 @@ Ship::Ship(int row, int col, int lengthOfShip, Direction direction)
              throw std::invalid_argument("Deine Koordinaten führen ins Nichts");
         }
     }
-
-
-
-
 }
 
 bool Ship::hasPartIn(int row, int col)
@@ -56,8 +52,6 @@ bool Ship::hasPartIn(int row, int col)
         }
     }
     return false;
-
-
 }
 
 Part &Ship::getPartIn(int row, int col)

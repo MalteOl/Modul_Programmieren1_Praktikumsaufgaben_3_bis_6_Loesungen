@@ -47,7 +47,6 @@ void GameBoard::printEnemyBoard()
     cout << "Spielfeld des Gegners" << endl;
     for (size_t r = 0; r < m_enemyBoard.size(); r++) {
         cout << std::setw(2) << r << "|";
-//        cout << ". ";
         for (size_t c = 0; c < m_enemyBoard.size(); c++){
             cout << m_enemyBoard[r][c] << " ";
         }

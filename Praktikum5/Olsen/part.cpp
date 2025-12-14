@@ -9,12 +9,12 @@
 // Der (einzige) Konstruktor von Part soll ein unbeschädigtes Schiffsteil
 // an der in den Parametern übergebenen Position erstellen.
 
-Part::Part(int row, int col)
-{
-    m_row = row;
-    m_col = col;
-    m_status = 0;
-}
+Part::Part(int row, int col): m_row(row),m_col(col),m_status(0){}
+//{
+//    m_row = row;
+//    m_col = col;
+//    m_status = 0;
+//}
 
 // Für den Status existiert der Getter isDamaged, welcher true liefert
 // falls dieses Teil beschädigt ist
