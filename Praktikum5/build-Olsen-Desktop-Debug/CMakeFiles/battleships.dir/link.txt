@@ -1,0 +1,1 @@
+/usr/bin/g++ -DQT_QML_DEBUG -g CMakeFiles/battleships.dir/battleship.cpp.o CMakeFiles/battleships.dir/gameboard.cpp.o CMakeFiles/battleships.dir/main.cpp.o CMakeFiles/battleships.dir/part.cpp.o CMakeFiles/battleships.dir/player.cpp.o CMakeFiles/battleships.dir/ship.cpp.o CMakeFiles/battleships.dir/random.cpp.o -o battleships 
