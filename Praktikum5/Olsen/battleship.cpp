@@ -84,6 +84,12 @@ void Battleship::play()
         m_boards[i_active_player].mark(x, y, b);
         // sorgt dafür, dass in dem Gegner-Spielfeld die beschossenen Koordinaten aufgedeckt werden
         m_boards[i_active_player].printEnemyBoard();
+
+        cout << m_players[0].getName() << " hat " << m_players[0].getGamesWon() <<" Spiele gewonnen und "
+             << m_players[0].getGamesLost() << " verloren" << endl;
+        cout << m_players[1].getName() << " hat " << m_players[1].getGamesWon() <<" Spiele gewonnen und "
+             << m_players[1].getGamesLost() << " verloren" << endl;
+
         // Spielwechsel
         b_player = !b_player;
 

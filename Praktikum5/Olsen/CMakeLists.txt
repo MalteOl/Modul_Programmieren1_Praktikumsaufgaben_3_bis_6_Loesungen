@@ -18,4 +18,5 @@ add_executable(
   part.h
   player.h
   ship.h
-  random.cpp random.h)
+  random.cpp random.h
+  statistics.h statistics.cpp)

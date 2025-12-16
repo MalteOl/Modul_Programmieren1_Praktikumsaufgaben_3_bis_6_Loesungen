@@ -46,3 +46,15 @@ string Player::getName()
 {
     return m_playerName;
 }
+
+void Player::addHit()
+{
+    m_statistic.addHitCounter();
+//    m_statistic.getScore();
+}
+
+void Player::addMiss()
+{
+    m_statistic.addMissCounter();
+//    m_statistic.getScore();
+}

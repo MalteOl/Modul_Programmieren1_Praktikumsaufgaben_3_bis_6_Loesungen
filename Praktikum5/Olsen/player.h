@@ -11,6 +11,7 @@
 #define PLAYER_H
 
 #include <string>
+#include "statistics.h"
 using std::string;
 
 /**
@@ -65,6 +66,11 @@ class Player
    */
   void addGameLost();
 
+
+  void addHit();
+
+  void addMiss();
+
   /**
    * @brief Get the player's name
    * @return The player's name
@@ -89,6 +95,9 @@ class Player
    */
   // Der Name der Spielerin soll dabei ein constAttribut der Klasse Player sein.
   const string m_playerName;
+
+  Statistics m_statistic;
+
 };
 
 #endif // PLAYER_H
