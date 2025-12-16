@@ -1,6 +1,7 @@
 #include "gameboard.h"
 #include <iomanip>
 #include "random.h"
+#include "statistics.h"
 
 
 
@@ -76,19 +77,25 @@ bool GameBoard::hit(int row, int col)
             if (!part.isDamaged())
             {
                 part.setDamaged();
+                Statistics::addHitCounter();
                 cout << "BOOM!\n\n";
                 if (ship.isSunk())
                 {
                     cout << "Ship" << counter << " of your enemy is sunk!\n";
                 }
+
                 return true;
             }
         }
         counter++;
     }
     cout << "MISS!\n\n";
+    Statistics::addMissCounter();
     return false;
 }
+
+
+
 
 void GameBoard::mark(int row, int col, bool wasHit)
 {

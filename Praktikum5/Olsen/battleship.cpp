@@ -20,6 +20,8 @@ void Battleship::play()
     int i_active_player = 0;
     int i_inactive_player = 1;
 
+
+
     while (!m_boards[0].allShipsSunk() && !m_boards[1].allShipsSunk()) {
 
         // active first player player1Name always gets to start
@@ -51,8 +53,8 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-//            x--;
-//            y--;
+            //            x--;
+            //            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
@@ -68,27 +70,40 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-//            x--;
-//            y--;
+            //            x--;
+            //            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
                 cout << "Eingabe nicht im Feld. Bitte erneut eingeben" << endl;
                 continue;
             }
-
-
-
         }
         bool b = m_boards[i_inactive_player].hit(x, y);
         m_boards[i_active_player].mark(x, y, b);
+
+        if (b) {
+            m_players[i_active_player].addHit();
+        } else {
+            m_players[i_active_player].addMiss();
+        }
+
         // sorgt dafür, dass in dem Gegner-Spielfeld die beschossenen Koordinaten aufgedeckt werden
         m_boards[i_active_player].printEnemyBoard();
 
-        cout << m_players[0].getName() << " hat " << m_players[0].getGamesWon() <<" Spiele gewonnen und "
-             << m_players[0].getGamesLost() << " verloren" << endl;
-        cout << m_players[1].getName() << " hat " << m_players[1].getGamesWon() <<" Spiele gewonnen und "
-             << m_players[1].getGamesLost() << " verloren" << endl;
+
+        for (int i = 0; i < 2; ++i)
+        {
+            cout << "\nStatistics for " << m_players[i].getName() << " is: \n";
+            cout << "\nGames total: " << m_players[0].getGamesPlayed() << endl;
+            cout << "\tthe number of victories: " << m_players[i].getGamesWon() << endl;
+            cout << "\tthe number of losts: " << m_players[i].getGamesLost() << endl;
+                    cout << "\tthe number of shoots: " <<  m_players[i].getShootCounter() /*+  m_players[i].getMissCounter()*/<< endl;
+                    cout << "\tthe number of misses: " << m_players[i].getMissCounter() << endl;
+                    cout << "\tthe number of hits: " << m_players[i].getHitCounter() << endl;
+        }
+        cout << endl;
+
 
         // Spielwechsel
         b_player = !b_player;

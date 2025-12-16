@@ -8,6 +8,7 @@ using std::endl;
 int main()
 {
     string player1Name, player2Name;
+
     cout << "Wie lautet Ihr Name, Player 1?" << endl;
     cin >> player1Name;
     cout << "Wie lautet Ihr Name, Player 2?" << endl;

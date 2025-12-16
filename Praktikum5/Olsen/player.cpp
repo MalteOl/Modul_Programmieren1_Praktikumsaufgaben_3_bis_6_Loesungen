@@ -31,6 +31,12 @@ int Player::getGamesPlayed() const
     return m_gamesLost+m_gamesWon;
 }
 
+int Player::getHitCounter() const { return m_hitCounter; }
+
+int Player::getMissCounter() const { return m_missCounter; }
+
+int Player::getShootCounter() const { return m_hitCounter + m_missCounter; }
+
 void Player::addGameWon()
 {
     m_gamesWon++;
@@ -49,12 +55,11 @@ string Player::getName()
 
 void Player::addHit()
 {
-    m_statistic.addHitCounter();
-//    m_statistic.getScore();
+++m_hitCounter;
+
 }
 
 void Player::addMiss()
 {
-    m_statistic.addMissCounter();
-//    m_statistic.getScore();
+++m_missCounter;
 }

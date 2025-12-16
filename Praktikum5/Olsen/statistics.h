@@ -12,7 +12,6 @@ public:
     static int getMissCounter();
     static int getShootCounter();
 
-//    void getScore();
 private:
     // Hit PART of the Ship
     static int hitCounter;

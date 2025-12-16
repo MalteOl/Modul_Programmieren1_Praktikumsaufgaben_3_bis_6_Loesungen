@@ -52,6 +52,10 @@ class Player
 
   int getGamesPlayed() const;
 
+  int getHitCounter() const;
+  int getMissCounter() const;
+  int getShootCounter() const;
+
   /**
    * @brief Add another won game.
    *
@@ -77,7 +81,6 @@ class Player
    */
   string getName();
 
-  void setGamesWon(int newGamesWon);
 
   private:
   /**
@@ -96,6 +99,8 @@ class Player
   // Der Name der Spielerin soll dabei ein constAttribut der Klasse Player sein.
   const string m_playerName;
 
+  int m_hitCounter = 0;
+  int m_missCounter = 0;
   Statistics m_statistic;
 
 };
