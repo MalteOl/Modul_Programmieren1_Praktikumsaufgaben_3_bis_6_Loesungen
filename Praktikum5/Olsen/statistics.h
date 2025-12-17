@@ -18,7 +18,7 @@ private:
     // Hit the water
     int missCounter;
     // Total hits -> hitCounter + missCounter
-     int shootCounter;
+    int shootCounter;
 };
 
 
