@@ -20,8 +20,6 @@ void Battleship::play()
     int i_active_player = 0;
     int i_inactive_player = 1;
 
-
-
     while (!m_boards[0].allShipsSunk() && !m_boards[1].allShipsSunk()) {
 
         // active first player player1Name always gets to start
@@ -95,7 +93,7 @@ void Battleship::play()
         for (int i = 0; i < 2; ++i)
         {
             cout << "\nStatistics for " << m_players[i].getName() << " is: \n";
-            cout << "\nGames total: " << m_players[0].getGamesPlayed() << endl;
+            cout << "\nGames total: " << m_players[i].getGamesPlayed() << endl;
             cout << "\tthe number of victories: " << m_players[i].getGamesWon() << endl;
             cout << "\tthe number of losts: " << m_players[i].getGamesLost() << endl;
                     cout << "\tthe number of shoots: " <<  m_players[i].getShootCounter() /*+  m_players[i].getMissCounter()*/<< endl;

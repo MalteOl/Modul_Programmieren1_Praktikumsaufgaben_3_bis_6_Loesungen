@@ -67,7 +67,7 @@ void GameBoard::printEnemyBoard()
 
 bool GameBoard::hit(int row, int col)
 {
-    Statistics statistics();
+    Statistics statistics;
     int counter = 0;
     for (Ship &ship : m_ships)
     {
@@ -92,7 +92,7 @@ bool GameBoard::hit(int row, int col)
         counter++;
     }
     cout << "MISS!\n\n";
-    Statistics::addMissCounter();
+    statistics.addMissCounter();
     return false;
 }
 
