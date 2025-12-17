@@ -67,6 +67,7 @@ void GameBoard::printEnemyBoard()
 
 bool GameBoard::hit(int row, int col)
 {
+    Statistics statistics();
     int counter = 0;
     for (Ship &ship : m_ships)
     {
@@ -77,7 +78,8 @@ bool GameBoard::hit(int row, int col)
             if (!part.isDamaged())
             {
                 part.setDamaged();
-                Statistics::addHitCounter();
+
+                statistics.addHitCounter();
                 cout << "BOOM!\n\n";
                 if (ship.isSunk())
                 {

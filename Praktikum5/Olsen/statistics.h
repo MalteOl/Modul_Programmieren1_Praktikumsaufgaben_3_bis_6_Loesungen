@@ -6,8 +6,8 @@ class Statistics
 {
 public:
     Statistics();
-    static void addHitCounter();
-    static void addMissCounter();
+    void addHitCounter();
+    void addMissCounter();
     int getHitCounter();
     int getMissCounter();
     int getShootCounter();
