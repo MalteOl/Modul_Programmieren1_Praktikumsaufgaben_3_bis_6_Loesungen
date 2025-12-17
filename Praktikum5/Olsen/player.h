@@ -99,9 +99,9 @@ class Player
   // Der Name der Spielerin soll dabei ein constAttribut der Klasse Player sein.
   const string m_playerName;
 
-  int m_hitCounter = 0;
-  int m_missCounter = 0;
-  Statistics m_statistic;
+  int m_hitCounter;
+  int m_missCounter;
+//  Statistics m_statistic;
 
 };
 

@@ -1,14 +1,14 @@
 #include "statistics.h"
 
-int Statistics::hitCounter = 0;
-int Statistics::missCounter = 0;
-int Statistics::shootCounter = hitCounter + missCounter;
+//int Statistics::hitCounter = 0;
+//int Statistics::missCounter = 0;
+//int Statistics::shootCounter = hitCounter + missCounter;
 
-Statistics::Statistics()
+Statistics::Statistics(): hitCounter(0),missCounter(0),shootCounter(hitCounter + missCounter)
 {
-    // shootCounter = 0;
-    // missCounter = 0;
-    // shootCounter = hitCounter + missCounter;
+//     shootCounter = 0;
+//     missCounter = 0;
+//     shootCounter = hitCounter + missCounter;
 }
 
 void Statistics::addHitCounter()

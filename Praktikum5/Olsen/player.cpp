@@ -3,7 +3,7 @@
 // Player stellt eine Spielerin dar und speichert den Namen sowie
 // jeweils die Anzahl der gewonnenen und verlorenen Spiele.
 
-Player::Player(const string &playerName): m_gamesLost(0),m_gamesWon(0),m_playerName(playerName)
+Player::Player(const string &playerName): m_gamesLost(0),m_gamesWon(0),m_playerName(playerName),m_hitCounter(0),m_missCounter(0)
 {
 
 }
@@ -31,11 +31,20 @@ int Player::getGamesPlayed() const
     return m_gamesLost+m_gamesWon;
 }
 
-int Player::getHitCounter() const { return m_hitCounter; }
+int Player::getHitCounter() const
+{
+    return m_hitCounter;
+}
 
-int Player::getMissCounter() const { return m_missCounter; }
+int Player::getMissCounter() const
+{
+    return m_missCounter;
+}
 
-int Player::getShootCounter() const { return m_hitCounter + m_missCounter; }
+int Player::getShootCounter() const
+{
+    return m_hitCounter + m_missCounter;
+}
 
 void Player::addGameWon()
 {
@@ -55,11 +64,10 @@ string Player::getName()
 
 void Player::addHit()
 {
-++m_hitCounter;
-
+    m_hitCounter++;
 }
 
 void Player::addMiss()
 {
-++m_missCounter;
+    m_missCounter++;
 }

@@ -8,17 +8,17 @@ public:
     Statistics();
     static void addHitCounter();
     static void addMissCounter();
-    static int getHitCounter();
-    static int getMissCounter();
-    static int getShootCounter();
+    int getHitCounter();
+    int getMissCounter();
+    int getShootCounter();
 
 private:
     // Hit PART of the Ship
-    static int hitCounter;
+    int hitCounter;
     // Hit the water
-    static int missCounter;
+    int missCounter;
     // Total hits -> hitCounter + missCounter
-    static int shootCounter;
+     int shootCounter;
 };
 
 

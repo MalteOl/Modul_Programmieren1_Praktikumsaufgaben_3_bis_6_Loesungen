@@ -73,7 +73,6 @@ class Battleship
    */
   void play();
 
-  array<Player, 2> players() const;
   void setPlayers(const array<Player, 2> &newPlayers);
 
   private:
