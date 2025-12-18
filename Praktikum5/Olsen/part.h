@@ -47,6 +47,9 @@ class Part
    */
   bool isDamaged() const;
 
+  bool isCaptain() const;
+
+
   /**
    * @brief Sets the status of this part to a valued representing 'damaged'.
    *

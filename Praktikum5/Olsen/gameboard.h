@@ -132,6 +132,9 @@ public:
    */
     void mark(int row, int col, bool wasHit);
 
+    void markCaptain(int row, int col, bool wasHit);
+
+
     /**
    * @brief Randomly place ships.
    *
@@ -153,6 +156,9 @@ public:
    */
     void randomPlaceShips();
 
+    void randomPlaceCaptains();
+
+
     /**
    * @brief Test if all ships are sunk
    * @return True if all ships on this board are sunk
@@ -161,6 +167,8 @@ public:
    * reminder: The player has lost the game when she has no floating ship left.
    */
     bool allShipsSunk();
+
+    bool hitShipWithCaptain(int row, int col);
 
 private:
     /**

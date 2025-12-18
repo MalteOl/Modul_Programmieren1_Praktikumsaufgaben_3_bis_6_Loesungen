@@ -18,16 +18,18 @@ GameBoard::GameBoard() {
         row.fill('.');
 
     randomPlaceShips();
+    randomPlaceCaptains();
+
 }
 
 void GameBoard::printBoard()
 {
     cout << endl << "Dein Spielfeld" << endl;
     // Spielfeld ausgeben
-    for (size_t r = 0; r < m_board.size()-1; r++) {
+    for (size_t r = 0; r < m_board.size(); r++) {
         // Zeilennummer ausgeben
         cout << std::setw(2) << r << "|";
-        for (size_t c = 0; c < m_board.size()-1; c++) {
+        for (size_t c = 0; c < m_board.size(); c++) {
             cout << m_board[r][c] << " ";
         }
         cout << endl;
@@ -72,8 +74,19 @@ bool GameBoard::hit(int row, int col)
         if (ship.hasPartIn(row, col))
         {
             Part &part = ship.getPartIn(row, col);
-            //
+
             if (!part.isDamaged())
+            {
+                part.setDamaged();
+                cout << "BOOM!\n\n";
+                if (ship.isSunk())
+                {
+                    cout << "Ship" << counter << " of your enemy is sunk!\n";
+                }
+                return true;
+            }
+
+            if (part.isCaptain())
             {
                 part.setDamaged();
                 cout << "BOOM!\n\n";
@@ -93,6 +106,12 @@ bool GameBoard::hit(int row, int col)
 void GameBoard::mark(int row, int col, bool wasHit)
 {
     m_enemyBoard[row][col] = wasHit ? 'X' : 'O';
+
+}
+
+void GameBoard::markCaptain(int row, int col, bool wasHit)
+{
+    m_enemyBoard[row][col] = wasHit ? 'X' : 'C';
 
 }
 
@@ -206,6 +225,117 @@ void GameBoard::randomPlaceShips()
     }
 }
 
+
+void GameBoard::randomPlaceCaptains()
+{
+    int captainsPlaced = 0;
+    // einen Kapitän auf jedes der 10 Schiffe platzieren
+
+    // Original placement pattern extended to include 4 submarines (len=2)
+    for (size_t i = 0; i < 5; i++)
+    {
+        int length = 6 - i; // length of the ship
+        for (int j = 0; j < i; ++j)
+        {
+            int row, col, direction;
+//            do
+//            {
+//                row = getRandom(0, 9);
+//                col = getRandom(0, 9);
+//                direction = getRandom(0, 3);
+//                // check on overlap of battle field:
+//                bool overlap = false;
+//                switch (direction)
+//                {
+//                case 0:
+//                    // north
+//                    if ((row - length + 1) < 0)
+//                        overlap = true;
+//                    break;
+//                case 1:
+//                    // east
+//                    if ((col + length - 1) > 9)
+//                        overlap = true;
+//                    break;
+//                case 2:
+//                    // south
+//                    if ((row + length - 1) > 9)
+//                        overlap = true;
+//                    break;
+//                case 3:
+//                    // west
+//                    if ((col - length + 1) < 0)
+//                        overlap = true;
+//                    break;
+//                }
+
+//                for (Ship &ship : m_ships)
+//                {
+//                    for (int i = 0; i < length; ++i)
+//                    {
+//                        switch (direction)
+//                        {
+//                        case 0:
+//                            // north
+//                            if (ship.hasPartIn(row - i, col))
+//                                overlap = true;
+//                            break;
+//                        case 1:
+//                            // east
+//                            if (ship.hasPartIn(row, col + i))
+//                                overlap = true;
+//                            break;
+//                        case 2:
+//                            // south
+//                            if (ship.hasPartIn(row + i, col))
+//                                overlap = true;
+//                            break;
+//                        case 3:
+//                            // west
+//                            if (ship.hasPartIn(row, col - i))
+//                                overlap = true;
+//                            break;
+//                        }
+//                    }
+//                }
+
+//                if (!overlap)
+//                    break;
+
+//            } while (true);
+
+            switch (direction)
+            {
+            case 0:
+                m_ships[captainsPlaced] = Ship(row, col, length, Direction::north);
+                for (int i = 0; i < length; ++i)
+                    m_board[row - i][col] = '0' + captainsPlaced;
+                break;
+            case 1:
+                m_ships[captainsPlaced] = Ship(row, col, length, Direction::east);
+                for (int i = 0; i < length; ++i)
+                    m_board[row][col + i] = '0' + captainsPlaced;
+                break;
+            case 2:
+                m_ships[captainsPlaced] = Ship(row, col, length, Direction::south);
+                for (int i = 0; i < length; ++i)
+                    m_board[row + i][col] = '0' + captainsPlaced;
+                break;
+            case 3:
+                m_ships[captainsPlaced] = Ship(row, col, length, Direction::west);
+                for (int i = 0; i < length; ++i)
+                    m_board[row][col - i] = '0' + captainsPlaced;
+                break;
+            default:
+                break;
+            }
+
+            ++captainsPlaced;
+        }
+
+    }
+}
+
 bool GameBoard::allShipsSunk()
 {
     for (Ship &ship : m_ships)
@@ -214,5 +344,32 @@ bool GameBoard::allShipsSunk()
             return false;
     }
     return true;
+}
+
+
+bool GameBoard::hitShipWithCaptain(int row, int col)
+{
+    int counter = 0;
+    for (Ship &ship : m_ships)
+    {
+        if (ship.hasPartIn(row, col))
+        {
+            Part &part = ship.getPartIn(row, col);
+            //
+            if (!part.isDamaged())
+            {
+                part.setDamaged();
+                cout << "BOOM!\n\n";
+                if (ship.isSunk())
+                {
+                    cout << "Captain was hit of ship " << counter << " so that the whole ship of your enemy is sunk!\n";
+                }
+                return true;
+            }
+        }
+        counter++;
+    }
+    cout << "MISS!\n\n";
+    return false;
 }
 

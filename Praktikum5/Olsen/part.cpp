@@ -24,6 +24,11 @@ bool Part::isDamaged() const
     return m_status==1;
 }
 
+bool Part::isCaptain() const
+{
+    return m_status==1;
+}
+
 // ebenfalls für den Status existiert der Setter setDamaged, welcher
 // den Status auf „beschädigt“ setzt
 
