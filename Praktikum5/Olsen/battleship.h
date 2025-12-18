@@ -12,7 +12,6 @@
 #define BATTLESHIP_H
 #include "gameboard.h"
 #include "player.h"
-#include "aicontroller.h"
 
 #include <string>
 using std::string;

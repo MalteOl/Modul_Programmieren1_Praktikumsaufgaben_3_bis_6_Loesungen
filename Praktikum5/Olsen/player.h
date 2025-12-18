@@ -49,13 +49,6 @@ class Player
    */
   int getGamesLost() const;
 
-  /**
-   * @brief Get games played.
-   * @return The total number of games this player has played.
-   *
-   * \see getGamesWon
-   * \see getGamesLost
-   */
   int getGamesPlayed() const;
 
   /**

@@ -20,10 +20,6 @@ void Battleship::play()
     int i_active_player = 0;
     int i_inactive_player = 1;
 
-    Coordinate coordinates;
-    aiController ki;
-
-
     while (!m_boards[0].allShipsSunk() && !m_boards[1].allShipsSunk()) {
 
         // active first player player1Name always gets to start
@@ -55,8 +51,8 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            //            x--;
-            //            y--;
+//            x--;
+//            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
@@ -72,8 +68,8 @@ void Battleship::play()
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            //            x--;
-            //            y--;
+//            x--;
+//            y--;
 
             // Validate input
             if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
