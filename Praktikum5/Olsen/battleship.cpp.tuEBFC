@@ -80,12 +80,8 @@ void Battleship::play()
 
 
         }
-        // Treffer
         bool b = m_boards[i_inactive_player].hit(x, y);
-        // bool c = m_boards[i_inactive_player].hitCaptain(x, y);
-        // deckt das Feld, das getroffen wurde, auf
         m_boards[i_active_player].mark(x, y, b);
-        // m_boards[i_active_player].mark(x, y, c);
         // sorgt dafür, dass in dem Gegner-Spielfeld die beschossenen Koordinaten aufgedeckt werden
         m_boards[i_active_player].printEnemyBoard();
         // Spielwechsel
@@ -106,6 +102,4 @@ void Battleship::play()
         m_players[1].addGameLost();
         m_players[0].addGameWon();
     }
-
-
 }

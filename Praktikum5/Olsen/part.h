@@ -50,6 +50,7 @@ class Part
   bool isCaptain() const;
 
 
+
   /**
    * @brief Sets the status of this part to a valued representing 'damaged'.
    *
@@ -71,6 +72,10 @@ class Part
    */
   int getCol() const;
 
+  void setCaptain();
+
+  int getCaptain() const;
+
   private:
   /**
    * @brief The row where this part is located on the grid.
@@ -89,6 +94,9 @@ class Part
    * 1 means 'Damaged'
    */
   int m_status;
+
+  bool m_captain;
+
 };
 
 #endif // PART_H

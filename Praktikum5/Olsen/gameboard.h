@@ -130,9 +130,10 @@ public:
    * \see hit
    * \see printEnemyBoard
    */
-    void mark(int row, int col, bool wasHit);
 
-    void markCaptain(int row, int col, bool wasHit);
+    bool hitCaptain(int row, int col);
+
+    void mark(int row, int col, bool wasHit);
 
 
     /**
@@ -155,9 +156,6 @@ public:
    *
    */
     void randomPlaceShips();
-
-    void randomPlaceCaptains();
-
 
     /**
    * @brief Test if all ships are sunk

@@ -1,4 +1,5 @@
 #include "ship.h"
+#include "random.h"
 
 
 // Ship stellt ein Schiff dar, welches eben aus verschieden vielen Teilen
@@ -21,18 +22,27 @@ Ship::Ship(int row, int col, int lengthOfShip, Direction direction)
         throw std::invalid_argument("Schiffe mit mindestens 2 und maximal "
                                     "5 Teilen");
 
+//    int placeCaptain = getRandom(0,lengthOfShip - 1);
 
     for (int i = 0; i < lengthOfShip; i++) {
         if (direction == Direction::north) {
             m_parts.push_back(Part(row-i,col));
+            // falls noch kein Captain gesetzt nun an einer random Stelle setzen
+            if (i == m_parts[i].getCaptain()) {
+//                placeCaptain;
+                m_parts.push_back(Part(row-i,col/*,captain*/));
+            }
         } else if (direction == Direction::east) {
             m_parts.push_back(Part(row, col + i));
+//            m_parts.at(i).setIsCaptain(true);
         } else if (direction == Direction::south) {
             m_parts.push_back(Part(row + i, col));
+//            m_parts.at(i).setIsCaptain(true);
         } else if (direction == Direction::west) {
             m_parts.push_back(Part(row, col - i));
+//            m_parts.at(i).setIsCaptain(true);
         } else {
-             throw std::invalid_argument("Deine Koordinaten führen ins Nichts");
+            throw std::invalid_argument("Deine Koordinaten führen ins Nichts");
         }
     }
 }
@@ -71,6 +81,17 @@ Part &Ship::getPartIn(int row, int col)
     throw std::invalid_argument("Es gibt keine Teile an diesen Koordinaten");
 }
 
+//Part Ship::isCaptain(int row, int col)
+//{
+//    for (size_t i = 0; i < m_parts.size(); i++) {
+//        if (m_parts[i].getRow() != row && m_parts[i].getCol() != col) {
+//            return true;
+//        }
+//    }
+//    throw std::invalid_argument("Es gibt keinen Captain an diesen Koordinaten");
+
+//}
+
 // • beschädigt, wenn mindestens ein (aber nicht alle!) Schiffsteil
 //   beschädigt ist,
 bool Ship::isDamaged()
@@ -90,6 +111,7 @@ bool Ship::isDamaged()
     return false;
 }
 
+
 // • oder aber versenkt, wenn alle Schiffsteile beschädigt sind
 bool Ship::isSunk()
 {
@@ -104,7 +126,10 @@ bool Ship::isSunk()
         if (!(m_parts[i].isDamaged())) {
             return false;
         }
+        if (m_parts[i].isCaptain()) {
+            return true;
+            break;
+        }
     }
     return true;
 }
-
