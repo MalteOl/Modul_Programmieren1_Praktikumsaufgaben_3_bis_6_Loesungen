@@ -1,10 +1,10 @@
 #include "dinosaur.h"
 
-Dinosaur::Dinosaur() {}
+Dinosaur::Dinosaur(int c, string r) : currentWeigth(c), race(r) {}
 
 
 void Brachiosaurier() {
-//    int currentWeigth = 0.05 * Dinosaur().maximalWeigth();
+    //    int currentWeigth = 0.05 * Dinosaur().maximalWeigth();
 }
 
 void Parasaurolophusse() {

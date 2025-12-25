@@ -13,7 +13,7 @@ private:
     std::vector<Herbivor> herbivors;
 
 public:
-    Herbivor(int c, string r);
+    Herbivor(const int& c, const string& r);
 };
 
 #endif // HERBIVOR_H

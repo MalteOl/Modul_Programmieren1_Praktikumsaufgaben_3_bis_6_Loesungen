@@ -12,8 +12,6 @@ vector<Carnivore> carnivores;
 // 2 T-Rexe & 4 Raptoren
 
 Park::Park(int weigth, int growth, int fertilityRate, int hidingChance)
-{
-
-}
+{}
 
 
