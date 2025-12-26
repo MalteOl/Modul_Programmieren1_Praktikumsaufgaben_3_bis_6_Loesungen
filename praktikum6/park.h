@@ -11,7 +11,6 @@ class Park
 public:
     Park();
     Park(int weigth, int growth, int fertilityRate, int hidingChance);
-    vector<Carnivore> carnivores;
 private:
     void passingTime();
 };

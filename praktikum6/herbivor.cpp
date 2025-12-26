@@ -1,8 +1,5 @@
 #include "herbivor.h"
 
 
-
-
-
-Herbivor::Herbivor(int c, string r) : Dinosaur(c,r) {}
+Herbivor::Herbivor(const int& c, const string& r) : Dinosaur(c,r) {}
 

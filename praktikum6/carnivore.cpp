@@ -1,11 +1,4 @@
 #include "carnivore.h"
 
 
-// T-Rex in kg
-int maximalWeigth = 8000;
-
-
-Carnivore::Carnivore(int currentWeigth, string race)
-{
-
-}
+Carnivore::Carnivore(const int& c, const string& r) : currentWeigth(5),race("Brachiosaurus")  {}

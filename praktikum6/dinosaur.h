@@ -8,7 +8,9 @@ using std::string;
 class Dinosaur
 {
 private:
-
+    int currentWeigth;
+    int maximalWeigth;
+    string race;
 public:
     void Brachiosaurier();
     void Parasaurolophusse();
@@ -16,9 +18,7 @@ public:
     void Raptoren();
 
 
-    int currentWeigth;
-    int maximalWeigth;
-    string race;
+
 //    Dinosaur();
     Dinosaur(int c, string r);
 
