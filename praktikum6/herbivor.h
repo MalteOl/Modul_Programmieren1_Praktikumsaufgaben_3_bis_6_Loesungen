@@ -10,10 +10,12 @@ private:
     bool hide();
     int currentWeigth;
     string race;
-    std::vector<Herbivor> herbivors;
+    std::vector<Dinosaur*> herbivors;
 
 public:
     Herbivor(const int& c, const string& r);
+    void addHerbivors(Dinosaur *d);
+
 };
 
 #endif // HERBIVOR_H

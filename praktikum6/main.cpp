@@ -10,9 +10,9 @@ int main()
     string race = "Brachiosaurier";
 
     // constructs a Herbivor object which only exists for this line
-    Herbivor(5,"Brachiosaurier");
+//    Herbivor(5,"Brachiosaurier");
 
-    Herbivor herbivors(currentWeigth, race);
+//    Herbivor herbivors(currentWeigth, race);
 
 
 //    cout << herbivors(5,"Brachiosaurier") << endl;

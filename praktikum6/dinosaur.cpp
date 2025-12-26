@@ -1,5 +1,6 @@
 #include "dinosaur.h"
 
+// Konstruktor, der die Attribute als Parameter übergeben bekommt
 Dinosaur::Dinosaur(int c, string r) : currentWeigth(c), race(r) {}
 
 

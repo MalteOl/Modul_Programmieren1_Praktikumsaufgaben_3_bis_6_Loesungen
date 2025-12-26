@@ -1,4 +1,5 @@
 #include "carnivore.h"
 
 
-Carnivore::Carnivore(const int& c, const string& r) : currentWeigth(5),race("Brachiosaurus")  {}
+Carnivore::Carnivore(const int& c, const string& r) : Dinosaur{c,r}
+{}
