@@ -1,7 +1,16 @@
 #include "dinosaur.h"
 
 // Konstruktor, der die Attribute als Parameter übergeben bekommt
-Dinosaur::Dinosaur(int c, string r) : currentWeigth(c), race(r) {}
+Dinosaur::Dinosaur(int c, string r) : currentWeigth(c), race(r)
+{
+    c = 0;
+    r = "";
+}
+
+void Dinosaur::anzeigen()
+{
+    std::cout << currentWeigth << " and " << race;
+}
 
 
 void Brachiosaurier() {

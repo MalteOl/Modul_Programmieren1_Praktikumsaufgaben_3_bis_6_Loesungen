@@ -7,10 +7,10 @@
 class Carnivore : public Dinosaur
 {
 private:
-    bool hide();
-    int currentWeigth;
-    int maximalWeigth;
-    string race;
+//    int currentWeigth;
+//    int maximalWeigth;
+//    string race;
+
     std::vector<Carnivore> carnivores;
 
 public:
