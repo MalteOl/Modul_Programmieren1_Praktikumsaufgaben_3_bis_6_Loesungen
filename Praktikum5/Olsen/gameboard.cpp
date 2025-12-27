@@ -18,6 +18,7 @@ GameBoard::GameBoard() {
         row.fill('.');
 
     randomPlaceShips();
+
 }
 
 void GameBoard::printBoard()
@@ -47,8 +48,7 @@ void GameBoard::printEnemyBoard()
     cout << "Spielfeld des Gegners" << endl;
     for (size_t r = 0; r < m_enemyBoard.size(); r++) {
         cout << std::setw(2) << r << "|";
-        cout << ". ";
-        for (size_t c = 0; c < m_enemyBoard.size()-1; c++){
+        for (size_t c = 0; c < m_enemyBoard.size(); c++){
             cout << m_enemyBoard[r][c] << " ";
         }
         cout << endl;
@@ -73,23 +73,53 @@ bool GameBoard::hit(int row, int col)
         if (ship.hasPartIn(row, col))
         {
             Part &part = ship.getPartIn(row, col);
-            //
+
             if (!part.isDamaged())
             {
                 part.setDamaged();
                 cout << "BOOM!\n\n";
                 if (ship.isSunk())
                 {
-                    cout << "Ship" << counter << " of your enemy is sunk!\n";
+                    cout << "Ship " << counter << " of your enemy is sunk!\n";
                 }
                 return true;
             }
+
         }
         counter++;
     }
     cout << "MISS!\n\n";
     return false;
 }
+
+//bool GameBoard::hitCaptain(int row, int col)
+//{
+//    int counter = 0;
+//    for (Ship &ship : m_ships)
+//    {
+//        if (ship.hasPartIn(row, col))
+//        {
+//            Part &part = ship.isCaptain(row, col);
+
+//            // Captain of ship was hit
+//            if (!part.isDamaged())
+//            {
+//                part.setDamaged();
+//                cout << "BOOM!\n\n";
+//                //                if (ship.isSunk())
+//                //                {
+//                ship.isSunk();
+//                cout << "Captain was hit of ship " << counter << " so that the whole ship of your enemy is sunk!\n";
+//                //                }
+//                return true;
+//            }
+
+//        }
+//        counter++;
+//    }
+//    cout << "MISS!\n\n";
+//    return false;
+//}
 
 void GameBoard::mark(int row, int col, bool wasHit)
 {
@@ -109,10 +139,12 @@ void GameBoard::randomPlaceShips()
         for (int j = 0; j < i; ++j)
         {
             int row, col, direction;
+            int captainPosition;
             do
             {
                 row = getRandom(0, 9);
                 col = getRandom(0, 9);
+//                captainPosition = getRandom(0, length - 1);
                 direction = getRandom(0, 3);
                 // check on overlap of battle field:
                 bool overlap = false;
@@ -196,16 +228,51 @@ void GameBoard::randomPlaceShips()
                 m_ships[shipsPlaced] = Ship(row, col, length, Direction::west);
                 for (int i = 0; i < length; ++i)
                     m_board[row][col - i] = '0' + shipsPlaced;
+                //                if (m_board[row][col - i]!='C') {
+                //                    m_board[0][0]=='C';
+                //                }
                 break;
             default:
                 break;
             }
+            // Kapitän auf ein zufälliges Feld des Schiffs setzen
+            m_board[row][col] = 'C';
+
+
+            //            int captainIndex = getRandom(0, length - 1);
+            //            int captainRow = row, captainCol = col;
+            //            switch (direction) {
+            //            case 0: captainRow = row - captainIndex; break;
+            //            case 1: captainCol = col + captainIndex; break;
+            //            case 2: captainRow = row + captainIndex; break;
+            //            case 3: captainCol = col - captainIndex; break;
+            //            }
+            //            m_board[captainRow][captainCol] = 'C';
+
+            //            ++shipsPlaced;
+
+            //            int captainsPlaced = 0;
+            //            // einen Kapitän auf jedes der 10 Schiffe platzieren
+
+            //            while (captainsPlaced  <= 10) {
+            //                m_board[row][col] = 'C';
+            //                captainsPlaced++;
+            //            }
+
+            //            // pro Schiff einen Kapitän platzieren
+            //            for (int j = 0; j < i; ++j)
+            //            {
+
+            //            }
+
 
             ++shipsPlaced;
         }
 
     }
 }
+
+
 
 bool GameBoard::allShipsSunk()
 {
@@ -216,4 +283,3 @@ bool GameBoard::allShipsSunk()
     }
     return true;
 }
-

@@ -130,7 +130,11 @@ public:
    * \see hit
    * \see printEnemyBoard
    */
+
+    bool hitCaptain(int row, int col);
+
     void mark(int row, int col, bool wasHit);
+
 
     /**
    * @brief Randomly place ships.
@@ -161,6 +165,8 @@ public:
    * reminder: The player has lost the game when she has no floating ship left.
    */
     bool allShipsSunk();
+
+    bool hitShipWithCaptain(int row, int col);
 
 private:
     /**

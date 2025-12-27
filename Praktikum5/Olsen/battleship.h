@@ -34,17 +34,17 @@ using std::array;
  */
 class Battleship
 {
-  public:
-  /**
+public:
+    /**
    * @brief Battleship constructor
    * @param[in] player1Name Name of the first player
    * @param[in] player2Name Name of the second player
    */
-      // Battleship ist die „Hauptklasse“ des Spiels und verwaltet
-      // zwei PlayerObjekte sowie die jeweils dazugehörigen GameBoardObjekte.
-      Battleship(const string& player1Name, const string& player2Name);
+    // Battleship ist die „Hauptklasse“ des Spiels und verwaltet
+    // zwei PlayerObjekte sowie die jeweils dazugehörigen GameBoardObjekte.
+    Battleship(const string& player1Name, const string& player2Name);
 
-  /**
+    /**
    * @brief Play one game of Battleships!
    *
    * This functions shall do the following:
@@ -71,21 +71,21 @@ class Battleship
    *   8. Exit the function
    *
    */
-  void play();
+    void play();
 
-  array<Player, 2> players() const;
-  void setPlayers(const array<Player, 2> &newPlayers);
+    array<Player, 2> players() const;
+    void setPlayers(const array<Player, 2> &newPlayers);
 
-  private:
-  /**
+private:
+    /**
    * @brief Array containing the two \ref Player objects
    */
-  array<Player, 2> m_players;
+    array<Player, 2> m_players;
 
-  /**
+    /**
    * @brief Array containing the two \ref GameBoard objects, one for each player
    */
-  array<GameBoard, 2> m_boards;
+    array<GameBoard, 2> m_boards;
 };
 
 #endif // BATTLESHIP_H

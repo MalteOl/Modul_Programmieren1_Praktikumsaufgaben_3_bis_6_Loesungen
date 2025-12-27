@@ -9,10 +9,8 @@
 // Der (einzige) Konstruktor von Part soll ein unbeschädigtes Schiffsteil
 // an der in den Parametern übergebenen Position erstellen.
 
-Part::Part(int row, int col)
-{
-    m_status = 0;
-}
+Part::Part(int row, int col): m_row(row),m_col(col),m_status(0)/*,m_Captain(false)*/{}
+
 
 // Für den Status existiert der Getter isDamaged, welcher true liefert
 // falls dieses Teil beschädigt ist
@@ -21,6 +19,12 @@ bool Part::isDamaged() const
 {
     return m_status==1;
 }
+
+bool Part::isCaptain() const
+{
+    return m_captain==1;
+}
+
 
 // ebenfalls für den Status existiert der Setter setDamaged, welcher
 // den Status auf „beschädigt“ setzt
@@ -42,3 +46,14 @@ int Part::getCol() const
 {
     return m_col;
 }
+
+int Part::getCaptain() const
+{
+    return m_captain;
+}
+
+void Part::setCaptain()
+{
+    m_captain = 1;
+}
+

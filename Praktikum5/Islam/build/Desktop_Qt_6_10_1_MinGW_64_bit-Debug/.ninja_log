@@ -1,0 +1,8 @@
+# ninja log v6
+18	367	7871700245706774	CMakeFiles/schiffeversenken.dir/part.cpp.obj	1f809ed5ecd36822
+29	921	7871700245807503	CMakeFiles/schiffeversenken.dir/player.cpp.obj	47370dff3a9f50a0
+34	1122	7871700245867495	CMakeFiles/schiffeversenken.dir/ship.cpp.obj	f8ce96f632c26994
+6	1238	7871700245576769	CMakeFiles/schiffeversenken.dir/main.cpp.obj	6a1668cd288a720a
+13	1262	7871700245646778	CMakeFiles/schiffeversenken.dir/battleship.cpp.obj	f90da020531ed73e
+23	1876	7871700245757487	CMakeFiles/schiffeversenken.dir/gameboard.cpp.obj	5b33706f41224ae6
+1877	2227	7871700264294239	schiffeversenken.exe	811de8ea86d1deb0

@@ -46,16 +46,16 @@ void Battleship::play()
 
         if (i_active_player==0) {
             cout << "Bitte geben Sie nun die Koordinaten Ihren naechsten Schusses ein." << endl;
-            cout << "Zeile (1-9)_Leerzeichen_ Spalte (1-9): ";
+            cout << "Zeile (0-9)_Leerzeichen_ Spalte (0-9): ";
 
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            x--;
-            y--;
+//            x--;
+//            y--;
 
             // Validate input
-            if (!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
+            if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
                 cout << "Eingabe nicht im Feld. Bitte erneut eingeben" << endl;
                 continue;
             }
@@ -63,24 +63,33 @@ void Battleship::play()
 
         } else {
             cout << "Bitte geben Sie nun die Koordinaten Ihren naechsten Schusses ein." << endl;
-            cout << "Zeile (1-9)_Leerzeichen_ Spalte (1-9): ";
+            cout << "Zeile (0-9)_Leerzeichen_ Spalte (0-9): ";
 
             cin >> x >> y;
 
             // Adjust to 0-based indexing
-            x--;
-            y--;
+//            x--;
+//            y--;
 
             // Validate input
-            if (!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
+            if(!(x >= 0 && x < 10 && y >= 0 && y < 10)) {
                 cout << "Eingabe nicht im Feld. Bitte erneut eingeben" << endl;
                 continue;
             }
 
 
+
         }
+        // Treffer
         bool b = m_boards[i_inactive_player].hit(x, y);
+        // bool c = m_boards[i_inactive_player].hitCaptain(x, y);
+        // deckt das Feld, das getroffen wurde, auf
         m_boards[i_active_player].mark(x, y, b);
+        // m_boards[i_active_player].mark(x, y, c);
+        // sorgt dafür, dass in dem Gegner-Spielfeld die beschossenen Koordinaten aufgedeckt werden
+        m_boards[i_active_player].printEnemyBoard();
+        // Spielwechsel
+        b_player = !b_player;
 
     }
 

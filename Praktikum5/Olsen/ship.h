@@ -94,6 +94,7 @@ class Ship
    */
   bool hasPartIn(int row, int col);
 
+
   /**
    * @brief Returns the ship's part which is in the given row and col
    * @param[in] row Row of the Part
@@ -108,6 +109,9 @@ class Ship
    *
    * \see hasPartIn
    */
+
+
+
   Part& getPartIn(int row, int col);
 
   /**
@@ -120,6 +124,10 @@ class Ship
    *
    * \see isSunk
    */
+
+
+  bool isCaptain(int row, int col);
+
   bool isDamaged();
 
   /**

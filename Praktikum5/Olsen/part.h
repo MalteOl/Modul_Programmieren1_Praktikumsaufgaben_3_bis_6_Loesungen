@@ -47,6 +47,10 @@ class Part
    */
   bool isDamaged() const;
 
+  bool isCaptain() const;
+
+
+
   /**
    * @brief Sets the status of this part to a valued representing 'damaged'.
    *
@@ -68,7 +72,9 @@ class Part
    */
   int getCol() const;
 
-  void setCol(int newCol);
+  void setCaptain();
+
+  int getCaptain() const;
 
   private:
   /**
@@ -88,6 +94,9 @@ class Part
    * 1 means 'Damaged'
    */
   int m_status;
+
+  bool m_captain;
+
 };
 
 #endif // PART_H
