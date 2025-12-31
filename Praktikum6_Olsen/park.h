@@ -13,8 +13,8 @@ private:
 
 public:
     Park();
-    void addHerbivore(string race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
-    void addCarnivore(string race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
+    void addHerbivore(Herbivore* h);
+    void addCarnivore(Carnivore* c);
 
 };
 
