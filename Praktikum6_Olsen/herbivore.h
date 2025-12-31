@@ -10,6 +10,8 @@ private:
 public:
     Herbivore();
     Herbivore(const string &race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
+    ~Herbivore();
+
     void hide();
 };
 
