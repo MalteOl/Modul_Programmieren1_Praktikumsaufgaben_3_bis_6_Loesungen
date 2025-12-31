@@ -8,9 +8,9 @@ int main()
 {
     cout << "Hello World!" << endl;
 
-    Park park; // non-const object
-    park.addCarnivore();
-    park.addHerbivore();
+//    Park park; // non-const object
+//    park.addCarnivore("100");
+//    park.addHerbivore("100");
 
     return 0;
 }

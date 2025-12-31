@@ -7,7 +7,7 @@ using std::string;
 
 class Dinosaur
 {
-private:
+protected:
     string m_race;
     int m_initialWeight, m_maxWeight;
     double m_growthRate, m_breadingChance;
