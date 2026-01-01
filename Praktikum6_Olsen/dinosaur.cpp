@@ -14,7 +14,7 @@ Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,
 bool Dinosaur::age()
 {
     if (m_currentWeigth < m_maxWeight) {
-
+        m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
     }
 }
 

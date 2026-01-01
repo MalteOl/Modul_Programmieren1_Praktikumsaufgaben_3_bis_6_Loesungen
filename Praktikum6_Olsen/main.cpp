@@ -10,9 +10,8 @@ int main()
 
     Park park; // non-const object
 
-
-
-
-
+    while (park.sumOfDinos() <= 100) {
+        park.passingTime();
+    }
     return 0;
 }
