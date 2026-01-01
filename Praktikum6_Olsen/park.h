@@ -8,13 +8,15 @@
 class Park
 {
 private:
-    std::vector<Herbivore*> m_herbivors;
     std::vector<Carnivore*> m_carnivors;
+    std::vector<Herbivore*> m_herbivors;
 
 public:
+
     Park();
     void addHerbivore(Herbivore* h);
     void addCarnivore(Carnivore* c);
+    void printHerbivore();
 
 };
 
