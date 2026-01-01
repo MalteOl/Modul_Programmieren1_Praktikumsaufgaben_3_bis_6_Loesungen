@@ -9,7 +9,7 @@ private:
 
 public:
     Carnivore();
-    Carnivore(const string &race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
+    Carnivore(const string &race, double initialWeight, int maxWeight, double growthRate, double breadingChance, double hidingChance);
     ~Carnivore();
     void hunt();
 };

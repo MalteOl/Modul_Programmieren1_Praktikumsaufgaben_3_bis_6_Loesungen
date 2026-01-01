@@ -9,10 +9,10 @@ class Dinosaur
 {
 protected:
     string m_race;
-    int m_initialWeight, m_maxWeight;
-    double m_growthRate, m_breadingChance;
+    int m_maxWeight;
+    double  m_initialWeight, m_growthRate, m_breadingChance, m_hidingChance;
 public:
-    Dinosaur(string race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
+    Dinosaur(string race, double initialWeight, int maxWeight, double growthRate, double breadingChance, double hidingChance);
     bool age();
     bool bread();
 };

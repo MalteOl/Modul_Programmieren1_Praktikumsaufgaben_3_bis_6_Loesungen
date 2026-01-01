@@ -6,10 +6,9 @@
 class Herbivore : public Dinosaur
 {
 private:
-    float hidingChance();
 public:
     Herbivore();
-    Herbivore(const string &race, int initialWeight, int maxWeight, double growthRate, double breadingChance);
+    Herbivore(const string &race, double initialWeight, int maxWeight, double growthRate, double breadingChance, double hidingChance);
     ~Herbivore();
 
     void hide();
