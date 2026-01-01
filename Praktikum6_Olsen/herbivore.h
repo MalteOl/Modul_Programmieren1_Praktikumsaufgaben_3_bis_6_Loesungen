@@ -8,10 +8,11 @@ class Herbivore : public Dinosaur
 private:
 public:
     Herbivore();
-    Herbivore(const string &race, double initialWeight, int maxWeight, double growthRate, double breadingChance, double hidingChance);
+    Herbivore(const string &race, double currentWeigth, int maxWeight,
+              double growthRate, double breedingChance, double hidingChance);
     ~Herbivore();
 
-    void hide();
+    bool hide();
 };
 
 #endif // HERBIVORE_H

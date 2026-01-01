@@ -16,8 +16,8 @@ public:
     Park();
     void addHerbivore(Herbivore* h);
     void addCarnivore(Carnivore* c);
-    void printHerbivore();
-
+    void passingTime();
+    int sumOfDinos();
 };
 
 #endif // PARK_H

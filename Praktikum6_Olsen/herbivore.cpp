@@ -1,11 +1,12 @@
 #include "herbivore.h"
 
 
-Herbivore::Herbivore(const string &race, double initialWeight, int maxWeight, double growthRate, double breadingChance, double hidingChance):
-Dinosaur(race, initialWeight, maxWeight, growthRate, breadingChance, hidingChance)
+Herbivore::Herbivore(const string &race, double currentWeigth, int maxWeight,
+                     double growthRate, double breedingChance, double hidingChance):
+Dinosaur(race, currentWeigth, maxWeight, growthRate, breedingChance, hidingChance)
 {}
 
-void Herbivore::hide()
+bool Herbivore::hide()
 {
 
 }
