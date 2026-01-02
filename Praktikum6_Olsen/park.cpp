@@ -45,7 +45,14 @@ void Park::addCarnivore(Carnivore *c)
 
 void Park::passingTime()
 {
+    for (int i = 0; i < m_herbivors.size(); ++i) {
+        Herbivore& herbivore = *m_herbivors[i];
+        herbivore.age();
+    }
 
+    for (int i = 0; i < m_carnivors.size(); ++i) {
+
+    }
 }
 
 int Park::sumOfDinos()
