@@ -27,12 +27,12 @@ bool Dinosaur::age()
 // Sobald Maximalgewicht erreicht, stirbt der Dino
     if (m_currentWeigth < m_maxWeight) {
         m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
-    } else {
-//        delete herbivore;
     }
 }
 
 bool Dinosaur::breed()
 {
+    // eine zufällige Prozentzahl zwischen 0 und 100 wird verglichen mit der Vermehrungsrate
+    return getRandom(0,100) % 100 < m_breedingChance;
 
 }

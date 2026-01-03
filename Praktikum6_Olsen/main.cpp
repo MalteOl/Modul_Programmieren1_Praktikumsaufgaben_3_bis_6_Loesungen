@@ -12,6 +12,7 @@ int main()
 
     while (park.sumOfDinos() <= 100) {
         park.passingTime();
+        cout << "Verbleibende Dino-Population: " << park.sumOfDinos();
     }
     return 0;
 }

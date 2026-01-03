@@ -9,7 +9,7 @@ bool Carnivore::hunt(Herbivore herbivore)
 {
     // Carnivore wiegt mehr als Herbivore?
     if(currentWeigth() >= herbivore.currentWeigth()){
-
+        return true;
     }
 
 }
