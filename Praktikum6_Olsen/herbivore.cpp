@@ -1,13 +1,17 @@
 #include "herbivore.h"
 
-//#include "random.h"
 std::random_device rd;
 
 
 Herbivore::Herbivore(const string &race, double currentWeigth, int maxWeight,
                      double growthRate, double breedingChance, double hidingChance):
-Dinosaur(race, currentWeigth, maxWeight, growthRate, breedingChance, hidingChance)
+    Dinosaur(race, currentWeigth, maxWeight, growthRate, breedingChance, hidingChance)
 {}
+
+Herbivore::~Herbivore()
+{
+
+}
 
 bool Herbivore::hide()
 {

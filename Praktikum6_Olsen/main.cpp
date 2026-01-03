@@ -10,9 +10,12 @@ int main()
 
     Park park; // non-const object
 
-    while (park.sumOfDinos() <= 100) {
+    while (park.sumOfDinos() > 0 && park.sumOfDinos() <= 100) {
         park.passingTime();
-        cout << "Verbleibende Dino-Population: " << park.sumOfDinos();
+        cout << "Verbleibende Dino-Population: " << park.sumOfDinos() << endl;
+        cout << "Herbivoren: " << park.sumOfHerbivors() << endl;
+        cout << "Karnivoren: " << park.sumOfCarnivos() << endl;
+
     }
     return 0;
 }

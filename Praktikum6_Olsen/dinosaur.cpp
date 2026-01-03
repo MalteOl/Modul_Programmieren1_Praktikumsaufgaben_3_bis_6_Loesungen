@@ -27,7 +27,9 @@ bool Dinosaur::age()
 // Sobald Maximalgewicht erreicht, stirbt der Dino
     if (m_currentWeigth < m_maxWeight) {
         m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
+        return true;
     }
+    return false;
 }
 
 bool Dinosaur::breed()

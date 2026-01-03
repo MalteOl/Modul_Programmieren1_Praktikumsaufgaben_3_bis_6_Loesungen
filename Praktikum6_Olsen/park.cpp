@@ -45,13 +45,24 @@ void Park::addCarnivore(Carnivore *c)
 
 void Park::passingTime()
 {
-    for (int i = 0; i < m_herbivors.size(); ++i) {
-        Herbivore& herbivore = *m_herbivors[i];
-        herbivore.age();
-    }
+    // alle Herbivors & Carnivors altern lassen
+    for (int i = 0; i < m_herbivors.size(); ) {
 
-    for (int i = 0; i < m_carnivors.size(); ++i) {
+        if (!m_herbivors[i]->age()) {
+            delete m_herbivors[i];
+            m_herbivors.erase(m_herbivors.begin() + i);
+        } else {
+            ++i;
+        }
 
+        for (int i = 0; i < m_carnivors.size(); ) {
+            if (!m_carnivors[i]->age()) {
+                delete m_carnivors[i];
+                m_carnivors.erase(m_carnivors.begin() + i);
+            } else {
+                ++i;
+            }
+        }
     }
 }
 
@@ -59,4 +70,14 @@ int Park::sumOfDinos()
 {
     return  m_herbivors.size() + m_carnivors.size();
 
+}
+
+int Park::sumOfHerbivors()
+{
+    return m_herbivors.size();
+}
+
+int Park::sumOfCarnivos()
+{
+    return m_carnivors.size();
 }

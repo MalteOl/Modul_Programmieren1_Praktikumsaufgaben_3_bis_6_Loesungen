@@ -9,10 +9,6 @@ using std::string;
 
 class Dinosaur
 {
-protected:
-    string m_race;
-    int m_maxWeight;
-    double m_currentWeigth, m_growthRate, m_breedingChance, m_hidingChance;
 public:
     static int getRandom(int lower, int upper);
     Dinosaur(string race, double currentWeight, int maxWeight,
@@ -20,6 +16,10 @@ public:
     bool age();
     bool breed();
     double currentWeigth() const;
+protected:
+    string m_race;
+    int m_maxWeight;
+    double m_currentWeigth, m_growthRate, m_breedingChance, m_hidingChance;
 };
 
 #endif // DINOSAUR_H

@@ -6,14 +6,14 @@
 
 class Carnivore : public Dinosaur
 {
-private:
-
 public:
     bool hunt(Herbivore herbivore);
     Carnivore();
     Carnivore(const string &race, double currentWeigth, int maxWeight,
               double growthRate, double breedingChance, double hidingChance);
     ~Carnivore();
+private:
+
 };
 
 #endif // CARNIVORE_H

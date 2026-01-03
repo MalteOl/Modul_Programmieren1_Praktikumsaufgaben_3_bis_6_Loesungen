@@ -5,7 +5,6 @@
 
 class Herbivore : public Dinosaur
 {
-private:
 public:
     Herbivore();
     Herbivore(const string &race, double currentWeigth, int maxWeight,
@@ -13,6 +12,8 @@ public:
     ~Herbivore();
 
     bool hide();
+private:
+
 };
 
 #endif // HERBIVORE_H
