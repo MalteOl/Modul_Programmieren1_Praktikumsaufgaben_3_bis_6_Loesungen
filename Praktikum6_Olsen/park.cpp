@@ -26,11 +26,6 @@ Park::Park()
         Herbivore para ("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75);
         addHerbivore(para);
     }
-
-    // neue Dinos erzeugen
-    //    if (m_herbivors[i]->breed()==true) {
-    //        addHerbivore(para);
-    //    }
 }
 
 void Park::addHerbivore(const Herbivore &h)
@@ -54,13 +49,41 @@ void Park::passingTime()
         } else {
             ++i;
         }
-    // und alle Carnivors
+    // und jetzt alle Carnivors altern lassen
     for(int i = 0; i < m_carnivors.size(); i++)
         if (!m_carnivors[i].age()) {
             m_carnivors.erase(m_carnivors.begin() + i);
         } else {
             ++i;
         }
+
+
+    // Carnivors jagen Herbivors
+    for (int i = 0; i < m_carnivors.size(); ++i) {
+        int j = 0;
+        while (j < m_herbivors.size()) {
+            if (m_carnivors[i].hunt(m_herbivors[j])) {
+                m_herbivors.erase(m_herbivors.begin() + j);
+                break; // Ein Carnivore jagt nur einen Herbivore pro Zeiteinheit
+            } else {
+                ++j;
+            }
+        }
+    }
+    // neue Herbivores erzeugen
+    for (int i = 0; i < m_herbivors.size(); ++i) {
+        if (m_herbivors[i].breed()==true) {
+            addHerbivore(m_herbivors[i]);
+        }
+    }
+
+    // neue Carnivores erzeugen
+    for (int i = 0; i < m_carnivors.size(); ++i) {
+        if (m_carnivors[i].breed()==true) {
+            addCarnivore(m_carnivors[i]);
+        }
+    }
+
 }
 
 int Park::sumOfDinos()
