@@ -29,11 +29,12 @@ Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,
 
 bool Dinosaur::age()
 {
-    m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
+//    m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
+    m_currentWeigth += m_currentWeigth * m_growthRate;
 
 // Sobald Maximalgewicht erreicht oder irgendeine Zufallszahl größer ist als die
 // vorhergehende Wachstumsrate, stirbt der Dino
-    if (m_currentWeigth < m_maxWeight || getRandom(0,100) % 100 > m_breedingChance) {
+    if (m_currentWeigth > m_maxWeight || getRandom(0,100) % 100 > m_breedingChance) {
         return false;
     }
     return true;
