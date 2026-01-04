@@ -9,16 +9,16 @@ class Park
 {
 public:
     Park();
-    void addHerbivore(Herbivore *h);
-    void addCarnivore(Carnivore *c);
+    void addHerbivore(const Herbivore &h);
+    void addCarnivore(const Carnivore &c);
     void passingTime();
     int sumOfDinos();
     int sumOfHerbivors();
     int sumOfCarnivos();
     int sumOfT_Rexes();
 private:
-    std::vector<Carnivore*> m_carnivors;
-    std::vector<Herbivore*> m_herbivors;
+    std::vector<Carnivore> m_carnivors;
+    std::vector<Herbivore> m_herbivors;
 
 };
 
