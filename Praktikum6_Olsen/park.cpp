@@ -3,6 +3,7 @@
 
 Park::Park()
 {
+    // Name des Tiers, aktuelles Gewicht, Maximalgewicht, Wachstumsrate, Vermehrrate, Versteckchance
     // 2x T-Rex
     for (int i = 0; i < 2; ++i) {
         Carnivore *t_rex = new Carnivore
@@ -29,6 +30,11 @@ Park::Park()
             ("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75);
         addHerbivore(para);
     }
+
+    // neue Dinos erzeugen
+    //    if (m_herbivors[i]->breed()==true) {
+    //        addHerbivore(para);
+    //    }
 }
 
 void Park::addHerbivore(Herbivore *h)
@@ -45,7 +51,7 @@ void Park::addCarnivore(Carnivore *c)
 
 void Park::passingTime()
 {
-    // alle Herbivors & Carnivors altern lassen
+    // alle Herbivors & Carnivors altern lassen, i ist eine Zeiteinheit
     for (int i = 0; i < m_herbivors.size(); ) {
 
         if (!m_herbivors[i]->age()) {
@@ -80,4 +86,15 @@ int Park::sumOfHerbivors()
 int Park::sumOfCarnivos()
 {
     return m_carnivors.size();
+}
+
+int Park::sumOfT_Rexes()
+{
+    int counter = 0;
+    for (const auto *carnivore: m_carnivors)
+    {
+        if (carnivore->race() == "Tyrannosaurus Rex")
+            counter++;
+    }
+    return counter;
 }

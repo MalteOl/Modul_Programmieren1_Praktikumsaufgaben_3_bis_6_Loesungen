@@ -12,6 +12,11 @@ double Dinosaur::currentWeigth() const
     return m_currentWeigth;
 }
 
+string Dinosaur::race() const
+{
+    return m_race;
+}
+
 Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,
                    double growthRate, double breedingChance, double hidingChance):
     m_race(race),

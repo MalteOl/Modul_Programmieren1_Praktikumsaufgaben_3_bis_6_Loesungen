@@ -15,6 +15,7 @@ public:
     int sumOfDinos();
     int sumOfHerbivors();
     int sumOfCarnivos();
+    int sumOfT_Rexes();
 private:
     std::vector<Carnivore*> m_carnivors;
     std::vector<Herbivore*> m_herbivors;

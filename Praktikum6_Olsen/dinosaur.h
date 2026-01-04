@@ -16,6 +16,8 @@ public:
     bool age();
     bool breed();
     double currentWeigth() const;
+    string race() const;
+
 protected:
     string m_race;
     int m_maxWeight;
