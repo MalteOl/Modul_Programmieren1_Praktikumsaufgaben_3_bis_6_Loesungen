@@ -3,7 +3,8 @@
 Carnivore::Carnivore(const string &race, double currentWeigth, int maxWeight,
                      double growthRate, double breadingChance, double hidingChance) :
     Dinosaur(race, currentWeigth, maxWeight, growthRate, breadingChance, hidingChance)
-{}
+{
+}
 
 Carnivore::~Carnivore()
 {
@@ -13,8 +14,8 @@ Carnivore::~Carnivore()
 bool Carnivore::hunt(Herbivore herbivore)
 {
     // Carnivore wiegt mehr als Herbivore?
-    if(currentWeigth() >= herbivore.currentWeigth()){
+    if(getCurrentWeigth() >= herbivore.getCurrentWeigth()){
         return true;
     }
-
+    return false;
 }

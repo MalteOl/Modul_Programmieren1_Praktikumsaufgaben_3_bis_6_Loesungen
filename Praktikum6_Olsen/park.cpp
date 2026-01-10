@@ -1,17 +1,18 @@
 #include <iostream>
 #include "park.h"
 
+
 Park::Park()
 {
     // Name des Tiers, aktuelles Gewicht, Maximalgewicht, Wachstumsrate, Vermehrrate, Versteckchance
     // 2x T-Rex
     for (int i = 0; i < 2; ++i) {
-        Carnivore t_rex ("Tyrannosaurus Rex", 8000*0.05, 8000, 0.2, 0.8, 0);
+        Carnivore t_rex ("Tyrannosaurus Rex", 8000*0.2, 8000, 0.2, 0.8, 0);
         addCarnivore(t_rex);
     }
     // 4x Raptor
     for (int i = 0; i < 4; ++i) {
-        Carnivore rapt ("Raptor", 500*0.05, 500, 0.3, 0.12, 0);
+        Carnivore rapt ("Raptor", 500*0.2, 500, 0.3, 0.12, 0);
         addCarnivore(rapt);
     }
 
@@ -37,6 +38,43 @@ void Park::addHerbivore(const Herbivore &h)
 void Park::addCarnivore(const Carnivore &c)
 {
     m_carnivors.push_back(c);
+
+}
+
+void Park::breedSimulation()
+{
+    int breedCounter = 0;
+
+    for(int i = 0; i < m_herbivors.size(); i++)
+    {
+        if(m_herbivors[i].breed() )
+        {
+            breedCounter++;
+            Herbivore brach ("Brachiosaurus", 30000*0.05, 30000, 0.2, 0.2, 0.5);
+
+            addHerbivore(brach);
+        }
+    }
+
+    cout << "Born (HERBIVORE): +" << breedCounter << endl;
+
+    breedCounter = 0;
+
+    for(int j = 0; j < m_carnivors.size(); j++)
+    {
+        if(m_carnivors[j].breed())
+        {
+            breedCounter++;
+
+            Carnivore t_rex ("Tyrannosaurus Rex", 8000*0.2, 8000, 0.2, 0.8, 0);
+            addCarnivore(t_rex);
+        }
+    }
+    cout << "Born (CARNIVORE): +" << breedCounter << endl;
+}
+
+void Park::huntSimulation()
+{
 
 }
 
@@ -84,6 +122,11 @@ void Park::passingTime()
         }
     }
 
+    cout << "Verbleibende Dino-Population: " << sumOfDinos() << endl;
+    cout << "Herbivoren: " << sumOfHerbivors() << endl;
+    cout << "Karnivoren: " << sumOfCarnivos() << endl;
+    cout << "T-Rexe: " << sumOfT_Rexes() << endl;
+
 }
 
 int Park::sumOfDinos()
@@ -107,7 +150,7 @@ int Park::sumOfT_Rexes()
     int counter = 0;
     for (const auto carnivore: m_carnivors)
     {
-        if (carnivore.race() == "Tyrannosaurus Rex")
+        if (carnivore.getRace() == "Tyrannosaurus Rex")
             counter++;
     }
     return counter;

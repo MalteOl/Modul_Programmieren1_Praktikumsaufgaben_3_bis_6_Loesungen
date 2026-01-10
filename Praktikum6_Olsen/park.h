@@ -5,12 +5,17 @@
 #include "carnivore.h"
 #include "herbivore.h"
 
+using std::cout;
+using std::endl;
+
 class Park
 {
 public:
     Park();
     void addHerbivore(const Herbivore &h);
     void addCarnivore(const Carnivore &c);
+    void breedSimulation();
+    void huntSimulation();
     void passingTime();
     int sumOfDinos();
     int sumOfHerbivors();

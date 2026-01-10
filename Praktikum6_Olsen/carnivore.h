@@ -8,10 +8,11 @@ class Carnivore : public Dinosaur
 {
 public:
     bool hunt(Herbivore herbivore);
-    Carnivore();
     Carnivore(const string &race, double currentWeigth, int maxWeight,
               double growthRate, double breedingChance, double hidingChance);
     ~Carnivore();
+
+
 private:
 
 };

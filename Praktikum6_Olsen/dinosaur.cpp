@@ -7,14 +7,19 @@ int Dinosaur::getRandom(int lower, int upper)
     return dist(rd);
 }
 
-double Dinosaur::currentWeigth() const
+double Dinosaur::getCurrentWeigth() const
 {
     return m_currentWeigth;
 }
 
-string Dinosaur::race() const
+string Dinosaur::getRace() const
 {
     return m_race;
+}
+
+int Dinosaur::getMaxWeight() const
+{
+    return m_maxWeight;
 }
 
 Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,

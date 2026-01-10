@@ -7,6 +7,7 @@ extern std::random_device rd;
 
 using std::string;
 
+
 class Dinosaur
 {
 public:
@@ -15,8 +16,9 @@ public:
              double growthRate, double breedingChance, double hidingChance);
     bool age();
     bool breed();
-    double currentWeigth() const;
-    string race() const;
+    double getCurrentWeigth() const;
+    string getRace() const;
+    int getMaxWeight() const;
 
 protected:
     string m_race;
