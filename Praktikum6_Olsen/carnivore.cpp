@@ -17,5 +17,19 @@ bool Carnivore::hunt(Herbivore herbivore)
     if(getCurrentWeigth() >= herbivore.getCurrentWeigth()){
         return true;
     }
-    return false;
+
+    if(!herbivore.hide())
+    {
+        if(life != 2)
+        {
+            life++;
+        }
+        cout << "here";
+        return true;
+    }
+    else
+    {
+        life--;
+        return false;
+    }
 }

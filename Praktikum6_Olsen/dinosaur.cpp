@@ -22,6 +22,27 @@ int Dinosaur::getMaxWeight() const
     return m_maxWeight;
 }
 
+int Dinosaur::isAlive()
+{
+    return life;
+
+}
+
+double Dinosaur::getHidingChance() const
+{
+    return m_hidingChance;
+}
+
+double Dinosaur::getBreedingChance() const
+{
+    return m_breedingChance;
+}
+
+double Dinosaur::getGrowthRate() const
+{
+    return m_growthRate;
+}
+
 Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,
                    double growthRate, double breedingChance, double hidingChance):
     m_race(race),
@@ -39,7 +60,7 @@ bool Dinosaur::age()
 
 // Sobald Maximalgewicht erreicht oder irgendeine Zufallszahl größer ist als die
 // vorhergehende Wachstumsrate, stirbt der Dino
-    if (m_currentWeigth > m_maxWeight || getRandom(0,100) % 100 > m_breedingChance) {
+    if (m_currentWeigth > m_maxWeight || getRandom(0,99) % 100 > m_breedingChance) {
         return false;
     }
     return true;
@@ -48,6 +69,6 @@ bool Dinosaur::age()
 bool Dinosaur::breed()
 {
     // eine zufällige Prozentzahl zwischen 0 und 100 wird verglichen mit der Vermehrungsrate
-    return getRandom(0,100) % 100 < m_breedingChance;
+    return getRandom(0,99) / 100 < m_breedingChance;
 
 }

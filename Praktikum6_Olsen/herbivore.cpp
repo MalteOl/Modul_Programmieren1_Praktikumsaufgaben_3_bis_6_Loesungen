@@ -16,5 +16,5 @@ Herbivore::~Herbivore()
 bool Herbivore::hide()
 {
     // 0 - 100 %
-    return getRandom(0,100) % 100 < m_hidingChance;
+    return getRandom(0,99) % 100 < m_hidingChance;
 }
