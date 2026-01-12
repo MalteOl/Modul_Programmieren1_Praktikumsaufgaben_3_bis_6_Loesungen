@@ -80,7 +80,7 @@ bool Dinosaur::diesOfAge()
         return false;
     }
 
-    const int chance = std::rand() % 100;
+    const int chance = std::rand() / 100;
 
     return chance <= m_growthRate; // Boolischer Ausdruck, daher reicht return
 }

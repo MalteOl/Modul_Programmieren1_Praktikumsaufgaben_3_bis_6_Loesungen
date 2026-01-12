@@ -3,29 +3,37 @@
 
 Park::Park()
 {
-    // Name des Tiers, aktuelles Gewicht, Maximalgewicht, Wachstumsrate, Vermehrrate, Versteckchance
+    // Name des Tiers, aktuelles Gewicht, Maximalgewicht, Wachstumsrate, Vermehrrate (breedingChance), Versteckchance
     // 2x T-Rex
     for (int i = 0; i < 2; ++i) {
-        Carnivore t_rex ("Tyrannosaurus Rex", 8000*0.2, 8000, 0.2, 0.8, 0);
-        addCarnivore(t_rex);
+        addCarnivore(new Carnivore("Tyrannosaurus Rex", 8000*0.2, 8000, 0.2, 0.8, 0));
     }
     // 4x Raptor
     for (int i = 0; i < 4; ++i) {
-        Carnivore rapt ("Raptor", 500*0.2, 500, 0.3, 0.12, 0);
-        addCarnivore(rapt);
+        addCarnivore(new Carnivore("Raptor", 500*0.2, 500, 0.3, 0.12, 0));
     }
 
     // 4x Brachiosaurus
     for (int i = 0; i < 4; ++i) {
-        Herbivore brach ("Brachiosaurus", 30000*0.05, 30000, 0.2, 0.2, 0.5);
-        addHerbivore(brach);
+        addHerbivore(new Herbivore("Brachiosaurus", 30000*0.05, 30000, 0.2, 0.2, 0.5));
     }
 
     // 5x Parasaurolophus
     for (int i = 0; i < 5; ++i) {
-        Herbivore para ("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75);
-        addHerbivore(para);
+        addHerbivore(new Herbivore("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75));
     }
+}
+
+Park::~Park()
+{
+    for (auto c : m_carnivors) {
+        delete c;
+    }
+    m_carnivors.clear();
+    for (auto h : m_herbivors) {
+        delete h;
+    }
+    m_herbivors.clear();
 }
 
 std::vector<int> Park::findPrey()
@@ -34,7 +42,7 @@ std::vector<int> Park::findPrey()
 
     for (int i = 0; i < m_herbivors.size(); i++)
     {
-        if(m_herbivors[i].hide() == false)
+        if(m_herbivors[i]->hide() == false)
         {
             potentialPrey.push_back(i);
         }
@@ -48,22 +56,22 @@ void Park::hunt(std::vector<int> potentialPreys)
     // For Schleifen Zyklus 2x laufen lassen, aber nur für die, die nicht satt sind!
     for (int i = 0; i < m_carnivors.size(); i++)
     {
-        Carnivore& carni = m_carnivors.at(i);
+        Carnivore* carni = m_carnivors.at(i);
 
         bool preyCaught = false;
         for(int j = 0; j < potentialPreys.size(); j++)
         {
-            Herbivore potentialPrey = m_herbivors[potentialPreys[j]];
+            Herbivore* potentialPrey = m_herbivors[potentialPreys[j]];
 
             // Herbi zu schwer, move along tiny boi
-            if (potentialPrey.getCurrentWeigth() > carni.getCurrentWeigth())
+            if (potentialPrey->getCurrentWeigth() > carni->getCurrentWeigth())
             {
                 continue;
             }
 
             // Beute gefunden, hamham, finito
             preyCaught = true;
-            carni.setFed(true);
+            carni->setFed(true);
             deathHerbis(potentialPreys[i]);
             potentialPreys.erase(potentialPreys.begin() + j);
 
@@ -80,9 +88,9 @@ void Park::hunt(std::vector<int> potentialPreys)
         if (preyCaught == false)
         {
             // Hatte er noch etwas zu essen vom letzten Ma(h)l?
-            if (carni.getFed() == true)
+            if (carni->getFed() == true)
             {
-                carni.setFed(false);
+                carni->setFed(false);
             } else
             {
                 // wenn nicht, dann verhungert er
@@ -92,13 +100,13 @@ void Park::hunt(std::vector<int> potentialPreys)
     }
 }
 
-void Park::addHerbivore(const Herbivore &h)
+void Park::addHerbivore(Herbivore *h)
 {
     m_herbivors.push_back(h);
 
 }
 
-void Park::addCarnivore(const Carnivore &c)
+void Park::addCarnivore(Carnivore *c)
 {
     m_carnivors.push_back(c);
 
@@ -117,17 +125,17 @@ void Park::deathCarnis(int index)
 
 void Park::lifeHerbis(int index)
 {
-    Herbivore parent = m_herbivors.at(index);
-    m_herbivors.emplace_back(parent.getRace(), parent.getCurrentWeigth(), parent.getMaxWeight(),
-                              parent.getGrowthRate(), parent.getBreedingChance(), parent.getHidingChance());
+    Herbivore *parent = m_herbivors.at(index);
+    m_herbivors.emplace_back(new Herbivore(parent->getRace(), parent->getCurrentWeigth(), parent->getMaxWeight(),
+                                           parent->getGrowthRate(), parent->getBreedingChance(), parent->getHidingChance()));
 
 }
 
 void Park::lifeCarnis(int index)
 {
-    Carnivore parent = m_carnivors.at(index);
-    m_carnivors.emplace_back(parent.getRace(), parent.getCurrentWeigth(), parent.getMaxWeight(),
-                             parent.getGrowthRate(), parent.getBreedingChance(), parent.getHidingChance());
+    Carnivore* parent = m_carnivors.at(index);
+    m_carnivors.emplace_back(new Carnivore(parent->getRace(), parent->getCurrentWeigth(), parent->getMaxWeight(),
+                                       parent->getGrowthRate(), parent->getBreedingChance(), parent->getHidingChance()));
 
 }
 
@@ -137,12 +145,12 @@ void Park::breedSimulation()
 
     for (int i = 0; i < m_herbivors.size(); i++)
     {
-        if (m_herbivors.at(i).breed() && (sumOfDinos() <= 100))
+        if (m_herbivors.at(i)->breed() && (sumOfDinos() <= 100))
         {
             // Parasaurolophus erhält 3 Kinder
 
             int childrenCount = 1;
-            if (m_herbivors.at(i).getRace() == "Parasaurolophus")
+            if (m_herbivors.at(i)->getRace() == "Parasaurolophus")
             {
                 childrenCount = 3;
             }
@@ -155,8 +163,8 @@ void Park::breedSimulation()
 
             for (int count = 0; count < childrenCount; count++)
             {
-                m_herbivors.emplace_back(m_herbivors.at(i).getRace(), m_herbivors.at(i).getCurrentWeigth(), m_herbivors.at(i).getGrowthRate(), m_herbivors.at(i).getMaxWeight(),
-                                         m_herbivors.at(i).getBreedingChance(), m_herbivors.at(i).getHidingChance());
+                m_herbivors.emplace_back(new Herbivore(m_herbivors.at(i)->getRace(), m_herbivors.at(i)->getCurrentWeigth(), m_herbivors.at(i)->getGrowthRate(), m_herbivors.at(i)->getMaxWeight(),
+                                                       m_herbivors.at(i)->getBreedingChance(), m_herbivors.at(i)->getHidingChance()));
             }
         }
     }
@@ -167,12 +175,12 @@ void Park::breedSimulation()
 
     for (int i = 0; i < m_carnivors.size(); i++)
     {
-        Carnivore& carni = m_carnivors.at(i);
+        Carnivore* carni = m_carnivors.at(i);
         // Happy Birthday!
-        carni.age();
+        carni->age();
         // Sad Deathday?
         int countCarnis = m_carnivors.size();
-        if (carni.diesOfAge())
+        if (m_carnivors[i]->diesOfAge())
         {
             deathCarnis(i);
             // Keinen überspringen und die Liste ist kürzer geworden, also früher aufhören
@@ -183,10 +191,10 @@ void Park::breedSimulation()
         }
         // Carnivoren füttern
 
-        if (m_carnivors.at(i).breed() && sumOfDinos() <= 100)
+        if (m_carnivors.at(i)->breed() && sumOfDinos() <= 100)
         {
-            m_carnivors.emplace_back(m_carnivors.at(i).getRace(), m_carnivors.at(i).getCurrentWeigth(), m_carnivors.at(i).getGrowthRate(), m_carnivors.at(i).getMaxWeight(),
-                                     m_carnivors.at(i).getBreedingChance(), m_carnivors.at(i).getHidingChance());
+            m_carnivors.emplace_back(new Carnivore(m_carnivors.at(i)->getRace(), m_carnivors.at(i)->getCurrentWeigth(), m_carnivors.at(i)->getGrowthRate(), m_carnivors.at(i)->getMaxWeight(),
+                                                   m_carnivors.at(i)->getBreedingChance(), m_carnivors.at(i)->getHidingChance()));
         }
     }
 
@@ -206,7 +214,7 @@ void Park::huntSimulation()
         if(m_herbivors.size() >= 1)
         {
             // hunt success
-            if(m_carnivors[i].hunt(m_herbivors[randomHerbivoren]))
+            if(m_carnivors[i]->hunt(*m_herbivors[randomHerbivoren]))
             {
                 // cout << "here";
                 h_dieCounter++;
@@ -215,24 +223,24 @@ void Park::huntSimulation()
             // hunt failed
             else
             {
-                m_carnivors[i].minLife();
+                m_carnivors[i]->minLife();
             }
         }
         // nothing to eat life--
         else
         {
-            m_carnivors[i].minLife();
+            m_carnivors[i]->minLife();
         }
         // Check if its still alive
-        if(!m_carnivors[i].isAlive())
+        if(!m_carnivors[i]->isAlive())
         {
             c_dieCounter++;
             m_carnivors.erase(m_carnivors.begin() + i);
         }
     }
     cout << "HUNTING SEASON CASUALTIES FROM CARNIVORE" << endl;
-    cout << "Herbivore: -" << h_dieCounter << endl;
-    cout << "Carnivore: -" << c_dieCounter << endl;
+    cout << "Herbivore: " << h_dieCounter << endl;
+    cout << "Carnivore: " << c_dieCounter << endl;
 }
 
 void Park::passingTime()
@@ -241,18 +249,20 @@ void Park::passingTime()
 
     // alle Herbivors altern lassen
     for(int i = 0; i < m_herbivors.size(); i++) {
-        if (!m_herbivors[i].age()) {
+        if (!m_herbivors[i]->age()) {
             dieCounter++;
             m_herbivors.erase(m_herbivors.begin() + i);
+            i--;
         }
     }
 
     dieCounter = 0;
     // und jetzt alle Carnivors altern lassen
     for(int i = 0; i < m_carnivors.size(); i++) {
-        if (!m_carnivors[i].age()) {
+        if (!m_carnivors[i]->age()) {
             dieCounter++;
             m_carnivors.erase(m_carnivors.begin() + i);
+            i--;
         }
     }
 
@@ -311,7 +321,7 @@ int Park::sumOfT_Rexes()
     int counter = 0;
     for (const auto carnivore: m_carnivors)
     {
-        if (carnivore.getRace() == "Tyrannosaurus Rex")
+        if (carnivore->getRace() == "Tyrannosaurus Rex")
             counter++;
     }
     return counter;

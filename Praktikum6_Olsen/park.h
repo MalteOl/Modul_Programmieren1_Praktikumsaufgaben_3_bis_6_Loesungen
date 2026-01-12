@@ -12,8 +12,9 @@ class Park
 {
 public:
     Park();
-    void addHerbivore(const Herbivore &h);
-    void addCarnivore(const Carnivore &c);
+    ~Park(); // aus beiden Vektoren alle Pointers löschen
+    void addHerbivore(Herbivore *h);
+    void addCarnivore(Carnivore *c);
     void deathHerbis(int index);
     void deathCarnis(int index);
     void lifeHerbis(int index);
@@ -28,8 +29,8 @@ public:
     int sumOfCarnivos();
     int sumOfT_Rexes();
 private:
-    std::vector<Carnivore> m_carnivors;
-    std::vector<Herbivore> m_herbivors;
+    std::vector<Carnivore*> m_carnivors;
+    std::vector<Herbivore*> m_herbivors;
 
 };
 
