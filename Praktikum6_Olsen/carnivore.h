@@ -12,9 +12,11 @@ public:
               double growthRate, double breedingChance, double hidingChance);
     ~Carnivore();
 
+    bool getFed() const;
+    void setFed(bool fedValue);
 
 private:
-
+    bool m_fed;
 };
 
 #endif // CARNIVORE_H

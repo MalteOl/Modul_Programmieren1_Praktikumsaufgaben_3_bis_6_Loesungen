@@ -11,6 +11,18 @@ Carnivore::~Carnivore()
 
 }
 
+bool Carnivore::getFed() const
+{
+    return m_fed;
+
+}
+
+void Carnivore::setFed(bool fedValue)
+{
+    m_fed = fedValue;
+
+}
+
 bool Carnivore::hunt(Herbivore herbivore)
 {
     // Carnivore wiegt mehr als Herbivore?

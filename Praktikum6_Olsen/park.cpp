@@ -28,6 +28,70 @@ Park::Park()
     }
 }
 
+std::vector<int> Park::findPrey()
+{
+    std::vector<int> potentialPrey;
+
+    for (int i = 0; i < m_herbivors.size(); i++)
+    {
+        if(m_herbivors[i].hide() == false)
+        {
+            potentialPrey.push_back(i);
+        }
+    }
+
+    return potentialPrey;
+}
+
+void Park::hunt(std::vector<int> potentialPreys)
+{
+    // For Schleifen Zyklus 2x laufen lassen, aber nur für die, die nicht satt sind!
+    for (int i = 0; i < m_carnivors.size(); i++)
+    {
+        Carnivore& carni = m_carnivors.at(i);
+
+        bool preyCaught = false;
+        for(int j = 0; j < potentialPreys.size(); j++)
+        {
+            Herbivore potentialPrey = m_herbivors[potentialPreys[j]];
+
+            // Herbi zu schwer, move along tiny boi
+            if (potentialPrey.getCurrentWeigth() > carni.getCurrentWeigth())
+            {
+                continue;
+            }
+
+            // Beute gefunden, hamham, finito
+            preyCaught = true;
+            carni.setFed(true);
+            deathHerbis(potentialPreys[i]);
+            potentialPreys.erase(potentialPreys.begin() + j);
+
+            // alle folgenden potential preys müssen um 1 reduziert werden, weil einer entfallen ist
+            for (int k = j; k < potentialPreys.size(); k++)
+            {
+                potentialPreys[k] = potentialPreys[k]--;
+            }
+
+            break;
+        }
+
+        // Wenn keiner klein genug war...
+        if (preyCaught == false)
+        {
+            // Hatte er noch etwas zu essen vom letzten Ma(h)l?
+            if (carni.getFed() == true)
+            {
+                carni.setFed(false);
+            } else
+            {
+                // wenn nicht, dann verhungert er
+                deathCarnis(i);
+            }
+        }
+    }
+}
+
 void Park::addHerbivore(const Herbivore &h)
 {
     m_herbivors.push_back(h);
@@ -40,56 +104,90 @@ void Park::addCarnivore(const Carnivore &c)
 
 }
 
+void Park::deathHerbis(int index)
+{
+    m_herbivors.erase(m_herbivors.begin() + index);
+}
+
+void Park::deathCarnis(int index)
+{
+    m_carnivors.erase(m_carnivors.begin() + index);
+
+}
+
+void Park::lifeHerbis(int index)
+{
+    Herbivore parent = m_herbivors.at(index);
+    m_herbivors.emplace_back(parent.getRace(), parent.getCurrentWeigth(), parent.getMaxWeight(),
+                              parent.getGrowthRate(), parent.getBreedingChance(), parent.getHidingChance());
+
+}
+
+void Park::lifeCarnis(int index)
+{
+    Carnivore parent = m_carnivors.at(index);
+    m_carnivors.emplace_back(parent.getRace(), parent.getCurrentWeigth(), parent.getMaxWeight(),
+                             parent.getGrowthRate(), parent.getBreedingChance(), parent.getHidingChance());
+
+}
+
 void Park::breedSimulation()
 {
-    int breedCounter = 0;
+    // Herbivoren füttern
 
-    for(int i = 0; i < m_herbivors.size(); i++)
+    for (int i = 0; i < m_herbivors.size(); i++)
     {
-        if(m_herbivors[i].breed() )
+        if (m_herbivors.at(i).breed() && (sumOfDinos() <= 100))
         {
-            breedCounter++;
-            //            Herbivore brach ("Brachiosaurus", 30000*0.05, 30000, 0.2, 0.2, 0.5);
-            //            addHerbivore(brach);
-//                        Herbivore para ("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75);
-//                        addHerbivore(para);
+            // Parasaurolophus erhält 3 Kinder
+
+            int childrenCount = 1;
+            if (m_herbivors.at(i).getRace() == "Parasaurolophus")
+            {
+                childrenCount = 3;
+            }
+
+            // We cannot breed more dinos than we have room
+            if (100 - (m_herbivors.size() + m_carnivors.size()) < childrenCount)
+            {
+                childrenCount = 100 - (m_herbivors.size() + m_carnivors.size());
+            }
+
+            for (int count = 0; count < childrenCount; count++)
+            {
+                m_herbivors.emplace_back(m_herbivors.at(i).getRace(), m_herbivors.at(i).getCurrentWeigth(), m_herbivors.at(i).getGrowthRate(), m_herbivors.at(i).getMaxWeight(),
+                                         m_herbivors.at(i).getBreedingChance(), m_herbivors.at(i).getHidingChance());
+            }
         }
-        // Erzeuge ein neues Herbivore-Objekt mit den Attributen des Elternteils
-//        Herbivore baby(
-//            m_herbivors[i].getRace(),
-//            m_herbivors[i].getMaxWeight() * 0.05, // Startgewicht 5%
-//            m_herbivors[i].getMaxWeight(),
-//            m_herbivors[i].getGrowthRate(),
-//            m_herbivors[i].getBreedingChance(),
-//            m_herbivors[i].getHidingChance()
-//            );
-//        addHerbivore(baby);
     }
 
+    // hide&seek
+    std::vector<int> potentialPreys = findPrey();
+    hunt(potentialPreys);
 
-    breedCounter = 0;
-
-    for(int j = 0; j < m_carnivors.size(); j++)
+    for (int i = 0; i < m_carnivors.size(); i++)
     {
-        if(m_carnivors[j].breed())
+        Carnivore& carni = m_carnivors.at(i);
+        // Happy Birthday!
+        carni.age();
+        // Sad Deathday?
+        int countCarnis = m_carnivors.size();
+        if (carni.diesOfAge())
         {
-            breedCounter++;
-
-            //            Carnivore t_rex ("Tyrannosaurus Rex", 8000*0.2, 8000, 0.2, 0.8, 0);
-            //            addCarnivore(t_rex);
-//                        Carnivore rapt ("Raptor", 500*0.2, 500, 0.3, 0.12, 0);
-//                        addCarnivore(rapt);
+            deathCarnis(i);
+            // Keinen überspringen und die Liste ist kürzer geworden, also früher aufhören
+            // sonst altern Neugeborene oder wir greifen auf einen nicht vorhandenen Dino zu
+            i--;
+            countCarnis--;
+            continue;
         }
-        // Erzeuge ein neues Carnivore-Objekt mit den Attributen des Elternteils
-//        Carnivore baby(
-//            m_carnivors[j].getRace(),
-//            m_carnivors[j].getMaxWeight() * 0.2, // Startgewicht 20%
-//            m_carnivors[j].getMaxWeight(),
-//            m_carnivors[j].getGrowthRate(),
-//            m_carnivors[j].getBreedingChance(),
-//            m_carnivors[j].getHidingChance()
-//            );
-//        addCarnivore(baby);
+        // Carnivoren füttern
+
+        if (m_carnivors.at(i).breed() && sumOfDinos() <= 100)
+        {
+            m_carnivors.emplace_back(m_carnivors.at(i).getRace(), m_carnivors.at(i).getCurrentWeigth(), m_carnivors.at(i).getGrowthRate(), m_carnivors.at(i).getMaxWeight(),
+                                     m_carnivors.at(i).getBreedingChance(), m_carnivors.at(i).getHidingChance());
+        }
     }
 
 }
@@ -99,9 +197,8 @@ void Park::huntSimulation()
     int h_dieCounter = 0;
     int c_dieCounter = 0;
     int f_dieCounter = 0;
-    int randomHerbivoren = Dinosaur::getRandom(0,m_herbivors
-                                                          .size()-1);
-    int randomKarnivoren = Dinosaur::getRandom(0, m_carnivors.size()-1);
+    int randomHerbivoren = Dinosaur::getRandom(0, m_herbivors.size() - 1);
+    int randomKarnivoren = Dinosaur::getRandom(0, m_carnivors.size() - 1);
 
     for(int i = 0; i < m_carnivors.size(); i++)
     {
@@ -160,31 +257,31 @@ void Park::passingTime()
     }
 
 
-//    // Carnivors jagen Herbivors
-//    for (int i = 0; i < m_carnivors.size(); ++i) {
-//        int j = 0;
-//        while (j < m_herbivors.size()) {
-//            if (m_carnivors[i].hunt(m_herbivors[j])) {
-//                m_herbivors.erase(m_herbivors.begin() + j);
-//                break; // Ein Carnivore jagt nur einen Herbivore pro Zeiteinheit
-//            } else {
-//                ++j;
-//            }
-//        }
-//    }
-//    // neue Herbivores erzeugen
-//    for (int i = 0; i < m_herbivors.size(); ++i) {
-//        if (m_herbivors[i].breed()==true) {
-//            addHerbivore(m_herbivors[i]);
-//        }
-//    }
+    //    // Carnivors jagen Herbivors
+    //    for (int i = 0; i < m_carnivors.size(); ++i) {
+    //        int j = 0;
+    //        while (j < m_herbivors.size()) {
+    //            if (m_carnivors[i].hunt(m_herbivors[j])) {
+    //                m_herbivors.erase(m_herbivors.begin() + j);
+    //                break; // Ein Carnivore jagt nur einen Herbivore pro Zeiteinheit
+    //            } else {
+    //                ++j;
+    //            }
+    //        }
+    //    }
+    //    // neue Herbivores erzeugen
+    //    for (int i = 0; i < m_herbivors.size(); ++i) {
+    //        if (m_herbivors[i].breed()==true) {
+    //            addHerbivore(m_herbivors[i]);
+    //        }
+    //    }
 
-//    // neue Carnivores erzeugen
-//    for (int i = 0; i < m_carnivors.size(); ++i) {
-//        if (m_carnivors[i].breed()==true) {
-//            addCarnivore(m_carnivors[i]);
-//        }
-//    }
+    //    // neue Carnivores erzeugen
+    //    for (int i = 0; i < m_carnivors.size(); ++i) {
+    //        if (m_carnivors[i].breed()==true) {
+    //            addCarnivore(m_carnivors[i]);
+    //        }
+    //    }
 
     cout << "Verbleibende Dino-Population: " << sumOfDinos() << endl;
     cout << "Herbivoren: " << sumOfHerbivors() << endl;

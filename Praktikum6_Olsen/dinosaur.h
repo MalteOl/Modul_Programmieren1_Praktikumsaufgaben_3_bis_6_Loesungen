@@ -19,6 +19,7 @@ public:
              double growthRate, double breedingChance, double hidingChance);
     bool age();
     bool breed();
+    bool diesOfAge();
 
     void minLife(){life--;}
     int isAlive();

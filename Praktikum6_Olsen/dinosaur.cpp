@@ -72,3 +72,15 @@ bool Dinosaur::breed()
     return getRandom(0,99) / 100 < m_breedingChance;
 
 }
+
+bool Dinosaur::diesOfAge()
+{
+    if(m_currentWeigth != m_maxWeight)
+    {
+        return false;
+    }
+
+    const int chance = std::rand() % 100;
+
+    return chance <= m_growthRate; // Boolischer Ausdruck, daher reicht return
+}

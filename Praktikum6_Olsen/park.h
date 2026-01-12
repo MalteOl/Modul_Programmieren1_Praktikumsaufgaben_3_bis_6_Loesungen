@@ -14,6 +14,12 @@ public:
     Park();
     void addHerbivore(const Herbivore &h);
     void addCarnivore(const Carnivore &c);
+    void deathHerbis(int index);
+    void deathCarnis(int index);
+    void lifeHerbis(int index);
+    void lifeCarnis(int index);
+    std::vector<int> findPrey();
+    void hunt(std::vector<int> potentialPreys);
     void breedSimulation();
     void huntSimulation();
     void passingTime();
