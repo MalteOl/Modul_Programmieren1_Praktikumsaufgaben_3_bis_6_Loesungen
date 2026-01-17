@@ -28,6 +28,11 @@ int Dinosaur::isAlive()
 
 }
 
+void Dinosaur::setCurrentWeigth(double newCurrentWeigth)
+{
+    m_currentWeigth = newCurrentWeigth;
+}
+
 double Dinosaur::getHidingChance() const
 {
     return m_hidingChance;
@@ -55,12 +60,11 @@ Dinosaur::Dinosaur(string race, double currentWeigth, int maxWeight,
 
 bool Dinosaur::age()
 {
-//    m_currentWeigth += m_currentWeigth * (1 + m_growthRate);
-    m_currentWeigth += m_currentWeigth * m_growthRate;
+    setCurrentWeigth(m_currentWeigth + m_currentWeigth * (1 + m_growthRate));
 
-// Sobald Maximalgewicht erreicht oder irgendeine Zufallszahl größer ist als die
-// vorhergehende Wachstumsrate, stirbt der Dino
-    if (m_currentWeigth > m_maxWeight || getRandom(0,99) % 100 > m_breedingChance) {
+// Sobald Bedingung true, dass Maximalgewicht erreicht oder irgendeine Zufallsprozentzahl
+// größergleich die vorhergehende Wachstumsrate, stirbt der Dino
+    if (m_currentWeigth < m_maxWeight || getRandom(0,99) / 100 < m_breedingChance) {
         return false;
     }
     return true;
@@ -68,8 +72,8 @@ bool Dinosaur::age()
 
 bool Dinosaur::breed()
 {
-    // eine zufällige Prozentzahl zwischen 0 und 100 wird verglichen mit der Vermehrungsrate
-    return getRandom(0,99) / 100 < m_breedingChance;
+// ist die Vermehrrate größer als eine random Prozentzahl
+    return (getRandom(0,99) / 100) < m_breedingChance;
 
 }
 
@@ -82,5 +86,5 @@ bool Dinosaur::diesOfAge()
 
     const int chance = std::rand() / 100;
 
-    return chance <= m_growthRate; // Boolischer Ausdruck, daher reicht return
+    return chance <= m_growthRate;
 }

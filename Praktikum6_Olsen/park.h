@@ -14,7 +14,9 @@ public:
     Park();
     ~Park(); // aus beiden Vektoren alle Pointers löschen
     void addHerbivore(Herbivore *h);
+    void removeHerbivore(Herbivore *h);
     void addCarnivore(Carnivore *c);
+    void removeCarnivore(Carnivore *c);
     void deathHerbis(int index);
     void deathCarnis(int index);
     void lifeHerbis(int index);

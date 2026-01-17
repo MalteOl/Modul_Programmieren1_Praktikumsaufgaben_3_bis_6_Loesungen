@@ -11,12 +11,15 @@ int main()
     while (park.sumOfDinos() > 0 && park.sumOfDinos() <= 100) {
 
         // Let them breed first
-        park.breedSimulation();
+//        park.breedSimulation();
 
         // Get hunt
-        park.huntSimulation();
+//        park.huntSimulation();
 
         park.passingTime();
+        int s = 0;
+        std::cin >> s;
+
 
     }
     return 0;
