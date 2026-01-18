@@ -204,43 +204,33 @@ void Park::huntSimulation()
 {
     int h_dieCounter = 0;
     int c_dieCounter = 0;
-    int f_dieCounter = 0;
-    int randomHerbivoren = Dinosaur::getRandom(0, m_herbivors.size() - 1);
-    int randomKarnivoren = Dinosaur::getRandom(0, m_carnivors.size() - 1);
-
-    for(int i = 0; i < m_carnivors.size(); i++)
-    {
-        // make sure there's enough herbivore to eat
-        if(m_herbivors.size() >= 1)
-        {
-            // hunt success
-            if(m_carnivors[i]->hunt(*m_herbivors[randomHerbivoren]))
-            {
-                // cout << "here";
+    std::vector<int> deadCarnivores;
+    for (int i = 0; i < static_cast<int>(m_carnivors.size()); ++i) {
+        if (!m_herbivors.empty()) {
+            int randomHerbivoren = Dinosaur::getRandom(0, static_cast<int>(m_herbivors.size()) - 1);
+            if (m_carnivors[i]->hunt(*m_herbivors[randomHerbivoren])) {
                 h_dieCounter++;
                 m_herbivors.erase(m_herbivors.begin() + randomHerbivoren);
-            }
-            // hunt failed
-            else
-            {
+            } else {
                 m_carnivors[i]->minLife();
             }
-        }
-        // nothing to eat life--
-        else
-        {
+        } else {
             m_carnivors[i]->minLife();
         }
-        // Check if its still alive
-        if(!m_carnivors[i]->isAlive())
-        {
+        if (!m_carnivors[i]->isAlive()) {
             c_dieCounter++;
-            m_carnivors.erase(m_carnivors.begin() + i);
+            deadCarnivores.push_back(i);
         }
     }
-    cout << "HUNTING SEASON CASUALTIES FROM CARNIVORE" << endl;
-    cout << "Herbivore: " << h_dieCounter << endl;
-    cout << "Carnivore: " << c_dieCounter << endl;
+    // Tote Karnivoren von hinten nach vorne löschen
+    for (int j = static_cast<int>(deadCarnivores.size()) - 1; j >= 0; --j) {
+        int idx = deadCarnivores[j];
+        delete m_carnivors[idx];
+        m_carnivors.erase(m_carnivors.begin() + idx);
+    }
+    std::cout << "HUNTING SEASON CASUALTIES FROM CARNIVORE" << std::endl;
+    std::cout << "Herbivore: " << h_dieCounter << std::endl;
+    std::cout << "Carnivore: " << c_dieCounter << std::endl;
 }
 
 void Park::passingTime()
