@@ -72,8 +72,9 @@ bool Dinosaur::age()
 
 bool Dinosaur::breed()
 {
+
 // ist die Vermehrrate größer als eine random Prozentzahl
-    return (getRandom(0,99) / 100) < m_breedingChance;
+    return (getRandom(0,99) / 100) <= m_breedingChance;
 
 }
 

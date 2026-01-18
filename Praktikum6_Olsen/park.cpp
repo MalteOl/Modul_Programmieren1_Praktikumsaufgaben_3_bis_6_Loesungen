@@ -45,6 +45,22 @@ Park::~Park()
 void Park::passingTime()
 {
 
+    // Jeder Dino kann sich fortpflanzen (breed() aufgerufen)
+    // Wachstumsrate-Funktion aufrufen (analog zu age())
+    size_t currentSizeOfCarnivors = m_carnivors.size();
+    for (size_t i = 0; i < currentSizeOfCarnivors; i++)
+        if (m_carnivors[i]->breed() && sumOfDinos() <  100) {
+            addCarnivore(new Carnivore(m_carnivors.at(i)->getRace(), m_carnivors.at(i)->getCurrentWeigth(), m_carnivors.at(i)->getMaxWeight(), m_carnivors.at(i)->getGrowthRate(), m_carnivors.at(i)->getBreedingChance(), m_carnivors.at(i)->getHidingChance()));
+
+        }
+
+    size_t currentSizeOHerbivors = m_herbivors.size();
+    for (size_t i = 0; i < currentSizeOHerbivors; i++)
+        if (m_herbivors[i]->breed() && sumOfDinos() <  100) {
+            cout <<  "Parasaurolophus hinzufügen";
+                addHerbivore(new Herbivore(m_herbivors.at(i)->getRace(), m_herbivors.at(i)->getCurrentWeigth(), m_herbivors.at(i)->getMaxWeight(), m_herbivors.at(i)->getGrowthRate(), m_herbivors.at(i)->getBreedingChance(), m_herbivors.at(i)->getHidingChance()));
+
+        }
 
 
     // Jeder Dino altert (age() aufgerufen)
@@ -71,6 +87,8 @@ void Park::passingTime()
 
 
     // Karnivore jagen Herbivors zuerst (hunt() aufgerufen)
+    // falls nach 2 Jagden keine Herbivoren gejagt wurden, stirbt der Karnivore
+    // TODO
     for (size_t i = 0; i < m_carnivors.size(); i++)
         if (m_carnivors[i]->hunt(*m_herbivors[i])) {
             m_herbivors.erase(m_herbivors.begin() + i);
@@ -93,19 +111,6 @@ void Park::passingTime()
 
     }
 
-
-
-
-
-    // Jeder Dino kann sich fortpflanzen (breed() aufgerufen)
-//        for (size_t i = 0; i < m_carnivors.size(); i++)
-//            if (m_carnivors[i]->breed()) {
-//                addCarnivore(new Carnivore("Raptor", 500*0.2, 500, 0.3, 0.12, 0));
-//            }
-//        for (size_t i = 0; i < m_carnivors.size(); i++)
-//            if (m_carnivors[i]->breed()) {
-//                addHerbivore(new Herbivore("Parasaurolophus", 1500*0.05, 1500, 0.4, 0.85, 0.75));
-//            }
 
 
     // Bestandslisten angepasst (Tiere entfernen/hinzufügen)
