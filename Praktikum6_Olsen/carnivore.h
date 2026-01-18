@@ -7,11 +7,11 @@
 class Carnivore : public Dinosaur
 {
 public:
-    bool hunt(Herbivore herbivore);
     Carnivore(const string &race, double currentWeigth, int maxWeight,
               double growthRate, double breedingChance, double hidingChance);
     ~Carnivore();
 
+    bool hunt(Herbivore &herbivore);
     bool getFed() const;
     void setFed(bool fedValue);
 

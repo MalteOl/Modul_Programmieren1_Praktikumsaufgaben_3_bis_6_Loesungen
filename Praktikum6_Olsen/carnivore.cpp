@@ -1,4 +1,5 @@
 #include "carnivore.h"
+#include "herbivore.h"
 
 Carnivore::Carnivore(const string &race, double currentWeigth, int maxWeight,
                      double growthRate, double breadingChance, double hidingChance) :
@@ -9,6 +10,21 @@ Carnivore::Carnivore(const string &race, double currentWeigth, int maxWeight,
 Carnivore::~Carnivore()
 {
 
+}
+
+bool Carnivore::hunt(Herbivore &herbivore)
+{
+    // Carnivore wiegt mehr als Herbivore?
+    if(getCurrentWeigth() <= herbivore.getCurrentWeigth()){
+        return false;
+    }
+
+    // Herbivore hat es nicht geschafft, sich rechtzeitig zu verstecken
+    if(!herbivore.hide()){
+        return true;
+    }
+    // Falls beides ja, darf Carnivore Herbivore jagen
+    return false;
 }
 
 bool Carnivore::getFed() const
@@ -23,25 +39,3 @@ void Carnivore::setFed(bool fedValue)
 
 }
 
-bool Carnivore::hunt(Herbivore herbivore)
-{
-    // Carnivore wiegt mehr als Herbivore?
-    if(getCurrentWeigth() >= herbivore.getCurrentWeigth()){
-        return true;
-    }
-
-    if(!herbivore.hide())
-    {
-        if(life != 2)
-        {
-            life++;
-        }
-        cout << "here";
-        return true;
-    }
-    else
-    {
-        life--;
-        return false;
-    }
-}
