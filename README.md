@@ -1,5 +1,6 @@
 # Modul Programmieren 1
 Lösungen der Praktikumsaufgaben ab Aufg. 2 bis Aufg. 6 mit eigener Lösung ohne bis geringer Zuhilfenahme von KI wie ChatGPT    
+
 Für die Aufgabenstellungen siehe https://code.fbi.h-da.de/m.roth/pg1-public/
 
 ## Praktikum 2
