@@ -1,4 +1,0 @@
-# Build-Ordner ignorieren
-build/
-*.o
-*.user
